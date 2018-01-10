@@ -15,6 +15,7 @@ class LoginForm extends React.Component {
       [e.target.name]: e.target.value
     });
   };
+
   render() {
     console.log('the form', this.state);
     return (
@@ -30,7 +31,6 @@ class LoginForm extends React.Component {
                 name="email"
                 value={this.state.email}
               />
-
               <Input
                 s={12}
                 onChange={e => this.updateForm(e)}
@@ -45,6 +45,8 @@ class LoginForm extends React.Component {
               >
                 Login<Icon right>person</Icon>
               </Button>
+              <br />
+              <a href="/signup">Sign Up</a>
             </div>
           </Col>
         </Row>

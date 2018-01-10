@@ -18,6 +18,9 @@ class NavBar extends React.Component {
         <NavItem href="/dashboard">
           <Icon>person</Icon>
         </NavItem>
+        <NavItem href="/forum">
+          <Icon>chat</Icon>
+        </NavItem>
         <NavItem href="/login">
           <Icon>check_circle</Icon>
         </NavItem>

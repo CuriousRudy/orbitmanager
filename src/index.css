@@ -8,6 +8,19 @@ nav {
   overflow: hidden;
 }
 
-/* div.app div. {
+/* #the-one {
+  background-size: 100%;
+  background-repeat: no-repeat;
   background-image: url('destiny_background.jpg');
 } */
+
+.memberList {
+  overflow: scroll;
+  height: 30em;
+}
+
+#messageSpace {
+  width: 100%;
+  height: 30em;
+  overflow: scroll;
+}
