@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { setPlayerInformation } from '../actions/index.js';
 
 class DashContainer extends React.Component {
   render() {
     return (
       <div className="white">
-        <h1>This is the DashContainer</h1>
+        <h3>DashContainer</h3>
+        <button onClick={() => console.log('clicked')}>Set State</button>
       </div>
     );
   }

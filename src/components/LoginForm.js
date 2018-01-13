@@ -1,5 +1,5 @@
 import React from 'react';
-import { loginUser } from '../actions/index.js';
+import { logUserIn } from '../actions/index.js';
 import { Row, Input, Button, Icon, Col } from 'react-materialize';
 import { connect } from 'react-redux';
 import '../index.css';
@@ -17,7 +17,7 @@ class LoginForm extends React.Component {
   };
 
   render() {
-    console.log('the form', this.state);
+    console.log('the form', this.props);
     return (
       <div className="uniqueLogin">
         <Row>
@@ -40,7 +40,9 @@ class LoginForm extends React.Component {
               />
               <Button
                 s={6}
-                onClick={loginUser(this.state.email, this.state.password)}
+                onClick={() =>
+                  this.props.logUserIn(this.state.email, this.state.password)
+                }
                 waves="light"
               >
                 Login<Icon right>person</Icon>
@@ -59,4 +61,4 @@ const mapStateToProps = state => {
   return state;
 };
 
-export default connect(mapStateToProps, { loginUser })(LoginForm);
+export default connect(mapStateToProps, { logUserIn })(LoginForm);

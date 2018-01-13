@@ -1,6 +1,7 @@
 import React from 'react';
-import { Row, Input, Button, Icon, Col } from 'react-materialize';
+import { Row, Input, Button, Col } from 'react-materialize';
 import { connect } from 'react-redux';
+import { signUserUp } from '../actions/index.js';
 import '../index.css';
 
 class SignupForm extends React.Component {
@@ -10,8 +11,8 @@ class SignupForm extends React.Component {
     email: '',
     password: '',
     gamertag: '',
-    light_level: '',
-    main_class: ''
+    platform: '',
+    membershipId: ''
   };
 
   updateForm = e => {
@@ -20,7 +21,45 @@ class SignupForm extends React.Component {
     });
   };
 
+  evaluatePlatform = arg => {
+    // debugger;
+    switch (arg) {
+      case 'PSN':
+        return 0;
+      case 'XBL':
+        return -1;
+      default:
+        return -1;
+    }
+  };
+
+  storeToken = () => {
+    const token = this.props.token;
+    localStorage.setItem('token', token);
+  };
+
+  getMembershipId = (gamertag, platform) => {
+    // debugger;
+    fetch(
+      `https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/${platform}/${gamertag}/`,
+      {
+        headers: {
+          'x-api-key': '1e8df2625cb24d04938314296f91f366'
+        }
+      }
+    )
+      .then(res => res.json())
+      .then(data => {
+        this.props.signUserUp({
+          ...this.state,
+          membershipId: data.Response[0].membershipId
+        });
+      });
+    this.storeToken();
+  };
+
   render() {
+    console.log(this.state);
     return (
       <div className="container signer">
         <Row>
@@ -75,22 +114,32 @@ class SignupForm extends React.Component {
               placeholder="Gamertag (should have option for icon)"
             />
             <Input
-              s={4}
+              s={12}
+              type="select"
+              label="Platform"
+              name="platform"
+              value={this.state.platform}
               onChange={e => this.updateForm(e)}
-              type="number"
-              name="light_level"
-              value={this.state.light_level}
-              placeholder="LL"
-            />
-            <Input
+            >
+              <option value="2">PSN</option>
+              <option value="1">XBL</option>
+            </Input>
+            {/* <Input
               s={8}
               onChange={e => this.updateForm(e)}
               type="text"
               name="main_class"
               value={this.state.main_class}
               placeholder="Main Toon- should be selector for 3 classes"
-            />
+            /> */}
           </Col>
+          <Row>
+            <Button
+              onClick={() => {
+                this.getMembershipId(this.state.gamertag, this.state.platform);
+              }}
+            />
+          </Row>
         </Row>
       </div>
     );
@@ -98,7 +147,13 @@ class SignupForm extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return state;
+  return {
+    state
+  };
 };
 
-export default connect(mapStateToProps)(SignupForm);
+// const mapDispatchToProps = dispatch => {
+//   return { signUserUp: () => dispatch(signUserUp()) };
+// };
+
+export default connect(mapStateToProps, { signUserUp })(SignupForm);

@@ -3,14 +3,7 @@ import MemberList from '../components/memberList';
 import ForumMessages from '../components/ForumMessages';
 import ForumList from './ForumList';
 import { connect } from 'react-redux';
-import {
-  Row,
-  Col,
-  SideNav,
-  SideNavItem,
-  Button,
-  Icon
-} from 'react-materialize';
+import { Row, Col } from 'react-materialize';
 import '../index.css';
 
 class ForumContainer extends React.Component {
@@ -62,4 +55,8 @@ class ForumContainer extends React.Component {
   }
 }
 
-export default ForumContainer;
+const mapStateToProps = state => {
+  return state;
+};
+
+export default connect(mapStateToProps)(ForumContainer);

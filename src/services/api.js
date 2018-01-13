@@ -1,15 +1,24 @@
 import React from 'react';
-import reduxThunk from 'reduxThunk'
+import reduxThunk from 'reduxThunk';
+const API_ROOT = 'https://www.bungie.net/Platform/Destiny2/';
 
-const token = localStorage.getItem('token')
-const headers = return {'accept':'application/json', 'content-type': 'application/json', 'Authorization': token }
+// fetch to get the user's characters
+fetch(`API_ROOT/${platform}/Profile/${membershipId}/?components=100`)
+  .then(res => res.json())
+  .then(player => player.Response.profile.data.characterIds);
 
- const loginUser = user => {
-  return dispatch => {
-    fetch('http://localhost:3001/api/v1/auth', { headers: headers } )
-      .then(res => res.json())
-      .then(data => {
-        dispatch({ type: loginUser, payload: data });
-      });
-  };
-};
+fetch(
+  `API_ROOT/${platform}/Profile/${membershipId}/Character/${characterId}/?components=100`
+)
+  .then(res => res.json())
+  .then(player =>
+    this.dispatch({
+      type: 'SET_CHARACTER',
+      light: player.Response.character.data.light,
+      race: player.Response.character.data.raceHash,
+      gender: player.Response.character.data.genderHash,
+      class: player.Response.character.data.classHash,
+      level: player.Response.character.data.levelProgression.level,
+      playerEmblem: player.Response.character.data.emblemBackgroundPath
+    })
+  );
