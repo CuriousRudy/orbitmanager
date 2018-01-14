@@ -1,7 +1,12 @@
 import React from 'react';
 import { Row, Input, Button, Col } from 'react-materialize';
 import { connect } from 'react-redux';
-import { signUserUp } from '../actions/index.js';
+import {
+  signUserUp,
+  getPlayerCharacters,
+  setPlayerInformation
+} from '../actions/index.js';
+import CharactersSetup from './CharactersSetup';
 import '../index.css';
 
 class SignupForm extends React.Component {
@@ -40,91 +45,97 @@ class SignupForm extends React.Component {
 
   getMembershipId = (gamertag, platform) => {
     // debugger;
-    fetch(
-      `https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/${platform}/${gamertag}/`,
-      {
-        headers: {
-          'x-api-key': '1e8df2625cb24d04938314296f91f366'
+    return (
+      fetch(
+        `https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/${platform}/${gamertag}/`,
+        {
+          headers: {
+            'x-api-key': '1e8df2625cb24d04938314296f91f366'
+          }
         }
-      }
-    )
-      .then(res => res.json())
-      .then(data => {
-        this.props.signUserUp({
-          ...this.state,
-          membershipId: data.Response[0].membershipId
-        });
-      });
-    this.storeToken();
+      )
+        .then(res => res.json())
+        .then(data => {
+          this.props.signUserUp({
+            ...this.state,
+            membershipId: data.Response[0].membershipId
+          });
+        }),
+      this.props.getPlayerCharacters(this.props.current_user)
+    );
   };
 
   render() {
-    console.log(this.state);
+    // console.log(this.props);
     return (
       <div className="container signer">
-        <Row>
-          <Col s={7}>
-            <div>
-              <h4>Account Signup</h4>
-              <Input
-                s={6}
-                onChange={e => this.updateForm(e)}
-                type="text"
-                name="first_name"
-                value={this.state.first_name}
-                placeholder="First Name"
-              />
+        {this.props.isLoggedIn.status ? (
+          <CharactersSetup />
+        ) : (
+          <div>
+            <Row>
+              <Col s={7}>
+                <div>
+                  <h4>Account Signup</h4>
+                  <Input
+                    s={6}
+                    onChange={e => this.updateForm(e)}
+                    type="text"
+                    name="first_name"
+                    value={this.state.first_name}
+                    placeholder="First Name"
+                  />
 
-              <Input
-                s={6}
-                onChange={e => this.updateForm(e)}
-                type="text"
-                name="last_name"
-                value={this.state.last_name}
-                placeholder="Last Name"
-              />
+                  <Input
+                    s={6}
+                    onChange={e => this.updateForm(e)}
+                    type="text"
+                    name="last_name"
+                    value={this.state.last_name}
+                    placeholder="Last Name"
+                  />
 
-              <Input
-                s={4}
-                onChange={e => this.updateForm(e)}
-                type="email"
-                name="email"
-                value={this.state.email}
-                placeholder="Email"
-              />
+                  <Input
+                    s={7}
+                    onChange={e => this.updateForm(e)}
+                    type="email"
+                    name="email"
+                    value={this.state.email}
+                    placeholder="Email"
+                  />
 
-              <Input
-                s={8}
-                onChange={e => this.updateForm(e)}
-                type="password"
-                name="password"
-                value={this.state.password}
-                placeholder="Password"
-              />
-            </div>
-          </Col>
-          <Col s={5}>
-            <h4>Character Info</h4>
-            <Input
-              s={8}
-              onChange={e => this.updateForm(e)}
-              type="text"
-              name="gamertag"
-              value={this.state.gamertag}
-              placeholder="Gamertag (should have option for icon)"
-            />
-            <Input
-              s={12}
-              type="select"
-              label="Platform"
-              name="platform"
-              value={this.state.platform}
-              onChange={e => this.updateForm(e)}
-            >
-              <option value="2">PSN</option>
-              <option value="1">XBL</option>
-            </Input>
-            {/* <Input
+                  <Input
+                    s={5}
+                    onChange={e => this.updateForm(e)}
+                    type="password"
+                    name="password"
+                    value={this.state.password}
+                    placeholder="Password"
+                  />
+                </div>
+              </Col>
+              <Col s={5}>
+                <h4>Character Info</h4>
+                <Input
+                  s={8}
+                  onChange={e => this.updateForm(e)}
+                  type="text"
+                  name="gamertag"
+                  value={this.state.gamertag}
+                  placeholder="Gamertag (should have option for icon)"
+                />
+                <Input
+                  s={4}
+                  type="select"
+                  label="Platform"
+                  name="platform"
+                  value={this.state.platform}
+                  onChange={e => this.updateForm(e)}
+                >
+                  <option value="2">PSN</option>
+                  <option value="1">XBL</option>
+                </Input>
+                {/* <Input
               s={8}
               onChange={e => this.updateForm(e)}
               type="text"
@@ -132,15 +143,27 @@ class SignupForm extends React.Component {
               value={this.state.main_class}
               placeholder="Main Toon- should be selector for 3 classes"
             /> */}
-          </Col>
-          <Row>
-            <Button
-              onClick={() => {
-                this.getMembershipId(this.state.gamertag, this.state.platform);
-              }}
-            />
-          </Row>
-        </Row>
+              </Col>
+            </Row>
+            <Row>
+              <Button
+                id="my-butt"
+                floating
+                large
+                className="blue-grey"
+                waves="light"
+                icon="Go"
+                fixed="true"
+                onClick={() => {
+                  this.getMembershipId(
+                    this.state.gamertag,
+                    this.state.platform
+                  );
+                }}
+              />
+            </Row>
+          </div>
+        )}
       </div>
     );
   }
@@ -148,7 +171,7 @@ class SignupForm extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    state
+    ...state
   };
 };
 
@@ -156,4 +179,8 @@ const mapStateToProps = state => {
 //   return { signUserUp: () => dispatch(signUserUp()) };
 // };
 
-export default connect(mapStateToProps, { signUserUp })(SignupForm);
+export default connect(mapStateToProps, {
+  signUserUp,
+  getPlayerCharacters,
+  setPlayerInformation
+})(SignupForm);

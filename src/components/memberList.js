@@ -31,8 +31,8 @@ class MemberList extends React.Component {
       'another member',
       'third member'
     ];
-    let memberList = members.map(member => {
-      return <Member name={`${member}`} />;
+    let memberList = members.map((member, i) => {
+      return <Member key={i} name={`${member}`} />;
     });
     return (
       <div>

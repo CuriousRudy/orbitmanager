@@ -6,11 +6,32 @@ export function logUserIn(email, password) {
       method: 'POST',
       headers: {
         accept: 'application/json',
-        'content-type': 'application/json',
-        Authorzation:
-          'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoxfQ.x8mEyc8qrR50e7bEzPEl6qxGSbmFKk7FiKcw6YAxph0'
+        'content-type': 'application/json'
       },
       body: JSON.stringify({ email: email, password: password })
+    })
+      .then(res => res.json())
+      .then(data => {
+        dispatch({
+          type: 'LOGIN_USER',
+          user_id: data.id,
+          membershipId: data.membershipId,
+          gamertag: data.user,
+          platform: data.platform
+        });
+        localStorage.setItem('token', data.token);
+      });
+  };
+}
+
+export function checkLoginStatus(token) {
+  return dispatch => {
+    return fetch('http://localhost:3000/api/v1/current_user', {
+      headers: {
+        'Content-Type': 'Application/json',
+        Accept: 'Application/json',
+        Authorization: token
+      }
     })
       .then(res => res.json())
       .then(data => {
@@ -18,10 +39,9 @@ export function logUserIn(email, password) {
           type: LOGIN_USER,
           user_id: data.id,
           membershipId: data.membershipId,
-          gamertag: data.user,
-          token: data.token
+          gamertag: data.gamertag,
+          platform: data.platform
         });
-        localStorage.setItem('token', data.token);
       });
   };
 }
@@ -44,8 +64,7 @@ export function signUserUp(user) {
           user_id: data.id,
           membershipId: data.membershipId,
           gamertag: data.user,
-          platform: data.platform,
-          token: data.token
+          platform: data.platform
         });
         localStorage.setItem('token', data.token);
       });
@@ -56,30 +75,37 @@ export function getPlayerCharacters(current_user) {
     return fetch(
       `https://www.bungie.net/Platform/Destiny2/${
         current_user.platform
-      }/Profile/${current_user.membershipId}/?components=100`
+      }/Profile/${current_user.membershipId}/?components=100`,
+      {
+        headers: { 'x-api-key': '1e8df2625cb24d04938314296f91f366' }
+      }
     )
       .then(res => res.json())
-      .then(player =>
-        this.dispatch({
+      .then(player => {
+        dispatch({
           type: 'SET_CHARACTERS',
           characters: [...player.Response.profile.data.characterIds]
-        })
-      );
+        });
+      });
   };
 }
 
-export function setPlayerInformation(current_user) {
+export function setPlayerInformation(current_user, character) {
+  console.log('sup');
   return dispatch => {
     return fetch(
       `https://www.bungie.net/Platform/Destiny2/${
         current_user.platform
-      }/Profile/${current_user.membershipId}/Character/${
-        current_user.characterId
-      }/?components=100`
+      }/Profile/${
+        current_user.membershipId
+      }/Character/${character}/?components=200`,
+      {
+        headers: { 'x-api-key': '1e8df2625cb24d04938314296f91f366' }
+      }
     )
       .then(res => res.json())
       .then(player =>
-        this.dispatch({
+        dispatch({
           type: 'SET_CHARACTER',
           light: player.Response.character.data.light,
           race: player.Response.character.data.raceHash,

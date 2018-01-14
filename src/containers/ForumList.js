@@ -22,8 +22,8 @@ class ForumList extends React.Component {
       'this is a forum',
       'this is a forum'
     ];
-    const allForums = forums.map(forum => {
-      return <SideNavItem>this is a forum</SideNavItem>;
+    const allForums = forums.map((forum, i) => {
+      return <SideNavItem key={i}>this is a forum</SideNavItem>;
     });
     return (
       <SideNav

@@ -27,8 +27,8 @@ class ForumMessages extends React.Component {
       'how you doin!',
       'this shit is dope'
     ];
-    const messageList = messages.map(message => {
-      return <Message message={message} />;
+    const messageList = messages.map((message, i) => {
+      return <Message key={i} message={message} />;
     });
     return (
       <div className="container" id="messageSpace">

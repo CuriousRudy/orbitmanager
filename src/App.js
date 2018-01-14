@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { checkLoginStatus, getPlayerCharacters } from './actions/index.js';
 import './App.css';
 import './index.css';
 import { Route, Switch, withRouter } from 'react-router-dom';
@@ -11,9 +12,14 @@ import Welcome from './components/Welcome';
 import ForumContainer from './containers/forumContainer';
 
 class App extends Component {
+  componentDidMount = () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.props.checkLoginStatus(token);
+    }
+  };
   render() {
-    // const user = this.props.store.getState().current_user.loggedInUser;
-    // console.log(this.props);
+    // console.log('app mounted', this.props);
     return (
       <div id="the-one">
         <NavBar />
@@ -34,4 +40,6 @@ const mapStateToProps = state => {
   return { ...state };
 };
 
-export default withRouter(connect(mapStateToProps, null)(App));
+export default withRouter(
+  connect(mapStateToProps, { checkLoginStatus, getPlayerCharacters })(App)
+);

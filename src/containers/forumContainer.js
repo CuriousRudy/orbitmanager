@@ -2,6 +2,7 @@ import React from 'react';
 import MemberList from '../components/memberList';
 import ForumMessages from '../components/ForumMessages';
 import ForumList from './ForumList';
+// import { checkLoginStatus } from '../actions/index.js';
 import { connect } from 'react-redux';
 import { Row, Col } from 'react-materialize';
 import '../index.css';

@@ -7,7 +7,7 @@ function userLogin(
     user_id: '',
     membershipId: '',
     gamertag: '',
-    token: ''
+    platform: ''
   },
   action
 ) {
@@ -17,7 +17,6 @@ function userLogin(
         user_id: action.user_id,
         membershipId: action.membershipId,
         gamertag: action.gamertag,
-        token: action.token,
         platform: action.platform
       };
 
@@ -26,7 +25,7 @@ function userLogin(
         user_id: '',
         membershipId: '',
         gamertag: '',
-        token: ''
+        platform: ''
       };
     default:
       return state;
@@ -36,10 +35,7 @@ function userLogin(
 function toggleLogin(state = { status: false }, action) {
   switch (action.type) {
     case 'LOGIN_USER':
-      if (action.token !== '') {
-        return { status: true };
-      }
-      break;
+      return { status: true };
     case 'LOGOUT_USER':
       return { status: false };
     default:
@@ -47,7 +43,7 @@ function toggleLogin(state = { status: false }, action) {
   }
 }
 
-function setCharacters(state = { characters: [] }, action) {
+function setCharacters(state = { characterIds: [] }, action) {
   switch (action.type) {
     case 'SET_CHARACTERS':
       return [...action.characters];
@@ -58,18 +54,13 @@ function setCharacters(state = { characters: [] }, action) {
 
 function setPlayerInformation(
   state = {
-    light: null,
-    race: null,
-    gender: null,
-    class: null,
-    level: null,
-    playerEmblem: null
+    characters: []
   },
   action
 ) {
   switch (action.type) {
     case 'SET_CHARACTER':
-      return {
+      const character = {
         light: action.light,
         race: action.race,
         gender: action.gender,
@@ -77,6 +68,7 @@ function setPlayerInformation(
         level: action.level,
         playerEmblem: `https://www.bungie.net${action.playerEmblem}`
       };
+      return { characters: [...state.characters, character] };
     default:
       return state;
   }
@@ -86,7 +78,7 @@ const rootReducer = combineReducers({
   current_user: userLogin,
   isLoggedIn: toggleLogin,
   characterIds: setCharacters,
-  playerInformation: setPlayerInformation
+  characterDetails: setPlayerInformation
 });
 
 export default rootReducer;

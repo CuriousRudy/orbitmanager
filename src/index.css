@@ -8,12 +8,6 @@ nav {
   overflow: hidden;
 }
 
-/* #the-one {
-  background-size: 100%;
-  background-repeat: no-repeat;
-  background-image: url('destiny_background.jpg');
-} */
-
 .memberList {
   overflow: scroll;
   height: 30em;
@@ -23,4 +17,15 @@ nav {
   width: 100%;
   height: 30em;
   overflow: scroll;
+}
+
+#my-butt {
+  float: right;
+}
+
+#big-title {
+  text-align: center;
+}
+#big-title button {
+  position: center;
 }
