@@ -66,7 +66,7 @@ function setPlayerInformation(
         gender: action.gender,
         class: action.class,
         level: action.level,
-        playerEmblem: `https://www.bungie.net${action.playerEmblem}`
+        player_emblem: `https://www.bungie.net${action.player_emblem}`
       };
       return { characters: [...state.characters, character] };
     default:

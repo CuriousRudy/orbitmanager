@@ -30,11 +30,7 @@ class ForumMessages extends React.Component {
     const messageList = messages.map((message, i) => {
       return <Message key={i} message={message} />;
     });
-    return (
-      <div className="container" id="messageSpace">
-        {messageList}
-      </div>
-    );
+    return <ul className="blue-grey darken-3">{messageList}</ul>;
   }
 }
 

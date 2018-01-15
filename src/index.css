@@ -1,7 +1,20 @@
 body {
   margin: 0;
   padding: 0;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
   font-family: sans-serif;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+#the-one {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
 nav {
@@ -10,12 +23,12 @@ nav {
 
 .memberList {
   overflow: scroll;
-  height: 30em;
+  height: 35em;
 }
 
 #messageSpace {
   width: 100%;
-  height: 30em;
+  height: 40em;
   overflow: scroll;
 }
 
@@ -26,6 +39,6 @@ nav {
 #big-title {
   text-align: center;
 }
-#big-title button {
-  position: center;
+.character-card .card-content {
+  height: 20em;
 }

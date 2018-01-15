@@ -18,17 +18,16 @@ class ForumContainer extends React.Component {
         <div className="container">
           <h3>This is the forum</h3>
           <Row>
-            <Col s={2}>
+            <Col s={3}>
               <h3>Members</h3>
-
-              <MemberList />
+              <div>
+                <MemberList />
+              </div>
             </Col>
-            <Col s={10}>
-              <div className="blue-grey darken-4">
-                <h3> This is a forum message window.</h3>
-                <div>
-                  <ForumMessages />
-                </div>
+            <Col s={9}>
+              <h3> This is a forum message window.</h3>
+              <div id="messageSpace">
+                <ForumMessages />
               </div>
             </Col>
             <Col s={12}>

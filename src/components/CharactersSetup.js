@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getPlayerCharacters, setPlayerInformation } from '../actions/index.js';
 import Character from './Character';
+import { Row } from 'react-materialize';
 import '../index.css';
 
 class CharactersSetup extends React.Component {
@@ -28,26 +29,25 @@ class CharactersSetup extends React.Component {
       }
     );
     return (
-      <div>
-        <h3 id="big-title">Import Your Guardians</h3>
-        <div className="container">
-          {this.props.isLoggedIn.status ? (
-            <button
-              onClick={() => {
-                this.props.characterIds.map(characterId => {
-                  return this.props.setPlayerInformation(
-                    this.props.current_user,
-                    characterId
-                  );
-                });
-              }}
-            >
-              Import Your Guardians
-            </button>
-          ) : null}
-        </div>
+      <div id="big-title">
+        <h3>Import Your Guardians</h3>
 
-        <div>{characters}</div>
+        {this.props.isLoggedIn.status ? (
+          <button
+            onClick={() => {
+              this.props.characterIds.map(characterId => {
+                return this.props.setPlayerInformation(
+                  this.props.current_user,
+                  characterId
+                );
+              });
+            }}
+          >
+            Import Your Guardians
+          </button>
+        ) : null}
+
+        <Row>{characters}</Row>
       </div>
     );
   }

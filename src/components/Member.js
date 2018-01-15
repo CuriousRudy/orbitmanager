@@ -1,11 +1,18 @@
 import React from 'react';
-import { CollapsibleItem } from 'react-materialize';
 
 const Member = props => {
   return (
-    <CollapsibleItem header={`${props.name}`}>
-      <div>some stuff about user</div>
-    </CollapsibleItem>
+    <li className="blue-grey darken-3 collection-item avatar">
+      <i className="blue-grey material-icons circle green">insert_chart</i>
+      <span className="blue-grey title">Title</span>
+      <p>
+        First Line <br />
+        Second Line
+      </p>
+      <a href="#!" className="blue-grey secondary-content">
+        <i className="blue-grey material-icons">grade</i>
+      </a>
+    </li>
   );
 };
 

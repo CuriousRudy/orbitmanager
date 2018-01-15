@@ -1,13 +1,15 @@
 import React from 'react';
-import { Row, Col } from 'react-materialize';
 
 const Message = props => {
   return (
-    <Row>
-      <Col s={12}>
-        <div>{props.message}</div>
-      </Col>
-    </Row>
+    <li class="collection-item avatar">
+      <i class="material-icons circle green">insert_chart</i>
+      <span class="title">Title</span>
+      <p>Second Line</p>
+      <a href="#!" class="secondary-content">
+        <i class="material-icons">grade</i>
+      </a>
+    </li>
   );
 };
 

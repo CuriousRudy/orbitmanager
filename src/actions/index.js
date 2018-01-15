@@ -112,8 +112,22 @@ export function setPlayerInformation(current_user, character) {
           gender: player.Response.character.data.genderHash,
           class: player.Response.character.data.classHash,
           level: player.Response.character.data.levelProgression.level,
-          playerEmblem: player.Response.character.data.emblemBackgroundPath
+          player_emblem: player.Response.character.data.emblemBackgroundPath
         })
       );
+  };
+}
+
+export function postCharacter(character) {
+  return dispatch => {
+    return fetch(`http://localhost:3000/api/v1/characters`, {
+      method: 'POST',
+      headers: {
+        accept: 'application/json',
+        'content-type': 'application/json',
+        Authorization: localStorage.getItem('token')
+      },
+      body: JSON.stringify({ ...character })
+    });
   };
 }

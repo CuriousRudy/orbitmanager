@@ -9,15 +9,8 @@ class DashContainer extends React.Component {
     const token = localStorage.getItem('token');
     console.log('dash mounted', this.props);
     return (
-      <div className="white">
+      <div className="blue-grey lighten-2">
         <h3>DashContainer</h3>
-        <button
-        // onClick={() => {
-        //   this.props.getPlayerCharacters(this.props.current_user);
-        // }}
-        >
-          Set State
-        </button>
       </div>
     );
   }

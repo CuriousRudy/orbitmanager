@@ -1,5 +1,4 @@
 import React from 'react';
-import { Collapsible } from 'react-materialize';
 import Member from './Member';
 import '../index.css';
 
@@ -34,11 +33,7 @@ class MemberList extends React.Component {
     let memberList = members.map((member, i) => {
       return <Member key={i} name={`${member}`} />;
     });
-    return (
-      <div>
-        <Collapsible className="memberList">{memberList}</Collapsible>
-      </div>
-    );
+    return <ul className="memberList collection blue-grey">{memberList}</ul>;
   }
 }
 
