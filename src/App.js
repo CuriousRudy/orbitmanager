@@ -18,6 +18,7 @@ class App extends Component {
       this.props.checkLoginStatus(token);
     }
   };
+
   render() {
     // console.log('app mounted', this.props);
     return (

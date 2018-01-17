@@ -2,7 +2,7 @@ import { LOGIN_USER } from './types.js';
 
 export function logUserIn(email, password) {
   return dispatch => {
-    return fetch('http://localhost:3000/api/v1/auth', {
+    return fetch('https://blooming-mountain-49038.herokuapp.com/api/v1/auth', {
       method: 'POST',
       headers: {
         accept: 'application/json',
@@ -27,13 +27,16 @@ export function logUserIn(email, password) {
 
 export function checkLoginStatus(token) {
   return dispatch => {
-    return fetch('http://localhost:3000/api/v1/current_user', {
-      headers: {
-        'Content-Type': 'Application/json',
-        Accept: 'Application/json',
-        Authorization: token
+    return fetch(
+      'https://blooming-mountain-49038.herokuapp.com/api/v1/current_user',
+      {
+        headers: {
+          'Content-Type': 'Application/json',
+          Accept: 'Application/json',
+          Authorization: token
+        }
       }
-    })
+    )
       .then(res => res.json())
       .then(data => {
         dispatch({
@@ -50,7 +53,7 @@ export function checkLoginStatus(token) {
 
 export function signUserUp(user) {
   return dispatch => {
-    return fetch('http://localhost:3000/api/v1/users', {
+    return fetch('https://blooming-mountain-49038.herokuapp.com/api/v1/users', {
       method: 'POST',
       headers: {
         accept: 'application/json',
@@ -122,14 +125,17 @@ export function setPlayerInformation(current_user, character) {
 
 export function postCharacter(character) {
   return dispatch => {
-    return fetch(`http://localhost:3000/api/v1/characters`, {
-      method: 'POST',
-      headers: {
-        accept: 'application/json',
-        'content-type': 'application/json',
-        Authorization: localStorage.getItem('token')
-      },
-      body: JSON.stringify({ ...character })
-    });
+    return fetch(
+      `https://blooming-mountain-49038.herokuapp.com/api/v1/characters`,
+      {
+        method: 'POST',
+        headers: {
+          accept: 'application/json',
+          'content-type': 'application/json',
+          Authorization: localStorage.getItem('token')
+        },
+        body: JSON.stringify({ ...character })
+      }
+    );
   };
 }
