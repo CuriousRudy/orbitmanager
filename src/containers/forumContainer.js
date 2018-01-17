@@ -16,7 +16,6 @@ class ForumContainer extends React.Component {
       <div>
         <ForumList />
         <div className="container">
-          <h3>This is the forum</h3>
           <Row>
             <Col s={3}>
               <h3>Members</h3>

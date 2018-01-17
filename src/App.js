@@ -5,6 +5,7 @@ import './App.css';
 import './index.css';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import DashContainer from './containers/dashContainer';
+import ClanContainer from './containers/ClanContainer';
 import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
 import NavBar from './components/Navbar';
@@ -23,17 +24,24 @@ class App extends Component {
     // console.log('app mounted', this.props);
     return (
       <div id="the-one">
-        <NavBar />
-        <Switch>
-          <Route exact path="/" component={Welcome} />
-          <Route exact path="/login" component={LoginForm} />
-          <Route exact path="/dashboard" component={DashContainer} />
-          <Route exact path="/forum" component={ForumContainer} />
-          <Route exact path="/signup" component={SignupForm} />
-        </Switch>
+        <div>
+          <NavBar />
+          <Switch>
+            <Route exact path="/" component={Welcome} />
+            <Route exact path="/login" component={LoginForm} />
+            <Route exact path="/signup" component={SignupForm} />
+            <Route exact path="/dashboard" component={DashContainer} />
+            <Route exact path="/forum" component={ForumContainer} />
+            <Route exact path="/clans" component={ClanContainer} />
+          </Switch>
+        </div>
         <div>
           <footer
-            style={{ bottom: 0, position: 'relative', width: '100vw' }}
+            id="page-footer"
+            style={{
+              bottom: 0,
+              width: '100vw'
+            }}
             className="page-footer blue-grey darken-3"
           >
             <div className="container">

@@ -7,14 +7,11 @@ body {
   font-family: sans-serif;
 }
 
-main {
-  flex: 1 0 auto;
-}
-
 #the-one {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  justify-content: space-between;
 }
 
 nav {
@@ -28,7 +25,7 @@ nav {
 
 #messageSpace {
   width: 100%;
-  height: 54.5vh;
+  height: 50vh;
   overflow: scroll;
 }
 
@@ -41,4 +38,7 @@ nav {
 }
 .character-card .card-content {
   height: 20em;
+}
+#page-footer {
+  bottom: 0;
 }

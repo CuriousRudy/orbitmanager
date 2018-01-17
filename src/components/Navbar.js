@@ -29,7 +29,9 @@ class NavBar extends React.Component {
             <li>
               <NavLink to="/forum">Forum</NavLink>
             </li>
-
+            <li>
+              <NavLink to="/clans">Clans</NavLink>
+            </li>
             <li>
               {this.props.isLoggedIn.status ? (
                 <NavLink onClick={() => this.logout()} to="/">
@@ -46,7 +48,7 @@ class NavBar extends React.Component {
   }
 }
 const mapStateToProps = state => {
-  return state;
+  return { ...state };
 };
 
 export default connect(mapStateToProps)(NavBar);

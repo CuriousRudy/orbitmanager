@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 
 let state;
 
+//handles the login user credentials
 function userLogin(
   state = {
     user_id: '',
@@ -32,6 +33,7 @@ function userLogin(
   }
 }
 
+//toggles logged in status
 function toggleLogin(state = { status: false }, action) {
   switch (action.type) {
     case 'LOGIN_USER':
@@ -43,6 +45,7 @@ function toggleLogin(state = { status: false }, action) {
   }
 }
 
+//sets character id info for character import
 function setCharacters(state = { characterIds: [] }, action) {
   switch (action.type) {
     case 'SET_CHARACTERS':
@@ -52,7 +55,7 @@ function setCharacters(state = { characterIds: [] }, action) {
   }
 }
 
-// add LOGIN USER dispatch handler for setting characters
+// sets the information for each player character
 function setPlayerInformation(
   state = {
     characters: []
@@ -98,11 +101,28 @@ function setPlayerInformation(
   }
 }
 
+function getClanInfo(
+  state = {
+    allClans: [{ name: 'There are no Clans!' }]
+  },
+  action
+) {
+  switch (action.type) {
+    case 'FETCH_CLANS':
+      return [...action.clans];
+    case 'LOGOUT_USER':
+      return [];
+    default:
+      return state;
+  }
+}
+
 const rootReducer = combineReducers({
   current_user: userLogin,
   isLoggedIn: toggleLogin,
   characterIds: setCharacters,
-  characterDetails: setPlayerInformation
+  characterDetails: setPlayerInformation,
+  allClans: getClanInfo
 });
 
 export default rootReducer;

@@ -1,5 +1,6 @@
 import { LOGIN_USER } from './types.js';
 
+// logs the user in, sets player information to state
 export function logUserIn(email, password) {
   return dispatch => {
     return fetch('https://blooming-mountain-49038.herokuapp.com/api/v1/auth', {
@@ -25,6 +26,7 @@ export function logUserIn(email, password) {
   };
 }
 
+//checks token for authentication, sets player information to state if valid
 export function checkLoginStatus(token) {
   return dispatch => {
     return fetch(
@@ -51,6 +53,7 @@ export function checkLoginStatus(token) {
   };
 }
 
+//creates a new user in the database, sets player information to state
 export function signUserUp(user) {
   return dispatch => {
     return fetch('https://blooming-mountain-49038.herokuapp.com/api/v1/users', {
@@ -75,6 +78,8 @@ export function signUserUp(user) {
       });
   };
 }
+
+//fetches the charater Ids from destiny's api, sets them to state to fetch the character info
 export function getPlayerCharacters(current_user) {
   return dispatch => {
     return fetch(
@@ -95,6 +100,7 @@ export function getPlayerCharacters(current_user) {
   };
 }
 
+//takes the character information and sets the characters to state to import
 export function setPlayerInformation(current_user, character) {
   console.log('sup');
   return dispatch => {
@@ -123,6 +129,7 @@ export function setPlayerInformation(current_user, character) {
   };
 }
 
+//posts the character details to the backend to persist the player's characters
 export function postCharacter(character) {
   return dispatch => {
     return fetch(
@@ -137,5 +144,24 @@ export function postCharacter(character) {
         body: JSON.stringify({ ...character })
       }
     );
+  };
+}
+
+export function getAllClans() {
+  return dispatch => {
+    return fetch(`https://blooming-mountain-49038.herokuapp.com/api/v1/clans`, {
+      headers: {
+        accept: 'application/json',
+        'content-type': 'application/json',
+        Authorization: localStorage.getItem('token')
+      }
+    })
+      .then(res => res.json())
+      .then(clans =>
+        dispatch({
+          type: 'FETCH_CLANS',
+          clans: clans
+        })
+      );
   };
 }
