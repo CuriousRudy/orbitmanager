@@ -2,12 +2,12 @@ import React from 'react';
 
 const Message = props => {
   return (
-    <li class="collection-item avatar">
-      <i class="material-icons circle green">insert_chart</i>
-      <span class="title">Title</span>
+    <li className="collection-item avatar">
+      <i className="material-icons circle green">insert_chart</i>
+      <span className="title">Title</span>
       <p>Second Line</p>
-      <a href="#!" class="secondary-content">
-        <i class="material-icons">grade</i>
+      <a href="#!" className="secondary-content">
+        <i className="material-icons">grade</i>
       </a>
     </li>
   );

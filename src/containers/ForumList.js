@@ -28,9 +28,9 @@ class ForumList extends React.Component {
     return (
       <SideNav
         trigger={
-          <Button id="sidebar" className="scale-transition scale-in">
-            <Icon>forums</Icon>
-          </Button>
+          <a id="sidebar" className="btn btn-floating pulse">
+            <Icon>menu</Icon>
+          </a>
         }
         options={{ closeOnClick: true, menuWidth: 260, edge: 'left' }}
       >

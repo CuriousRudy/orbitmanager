@@ -11,30 +11,22 @@ class CharactersSetup extends React.Component {
     this.props.getPlayerCharacters(this.props.current_user);
   };
 
-  //   debugger;
-  //   if (this.props.characterDetails.length < 3) {
-  //     this.props.characterIds.map(characterId => {
-  //       return this.props.setPlayerInformation(
-  //         this.props.current_user,
-  //         characterId
-  //       );
-  //     });
-  //   }
-  // };
-
   render() {
-    const characters = this.props.characterDetails.characters.map(
+    let characters = this.props.characterDetails.characters.map(
       (character, i) => {
         return <Character key={i} character={character} />;
       }
     );
+
     return (
       <div id="big-title">
         <h3>Import Your Guardians</h3>
 
         {this.props.isLoggedIn.status ? (
           <button
+            className="pulse"
             onClick={() => {
+              // debugger;
               this.props.characterIds.map(characterId => {
                 return this.props.setPlayerInformation(
                   this.props.current_user,
@@ -46,8 +38,10 @@ class CharactersSetup extends React.Component {
             Import Your Guardians
           </button>
         ) : null}
-
         <Row>{characters}</Row>
+        <button>
+          <a href="/dashboard">Done</a>
+        </button>
       </div>
     );
   }

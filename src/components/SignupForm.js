@@ -26,18 +26,6 @@ class SignupForm extends React.Component {
     });
   };
 
-  evaluatePlatform = arg => {
-    // debugger;
-    switch (arg) {
-      case 'PSN':
-        return 0;
-      case 'XBL':
-        return -1;
-      default:
-        return -1;
-    }
-  };
-
   storeToken = () => {
     const token = this.props.token;
     localStorage.setItem('token', token);
@@ -45,24 +33,21 @@ class SignupForm extends React.Component {
 
   getMembershipId = (gamertag, platform) => {
     // debugger;
-    return (
-      fetch(
-        `https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/${platform}/${gamertag}/`,
-        {
-          headers: {
-            'x-api-key': '1e8df2625cb24d04938314296f91f366'
-          }
+    return fetch(
+      `https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/${platform}/${gamertag}/`,
+      {
+        headers: {
+          'x-api-key': '1e8df2625cb24d04938314296f91f366'
         }
-      )
-        .then(res => res.json())
-        .then(data => {
-          this.props.signUserUp({
-            ...this.state,
-            membershipId: data.Response[0].membershipId
-          });
-        }),
-      this.props.getPlayerCharacters(this.props.current_user)
-    );
+      }
+    )
+      .then(res => res.json())
+      .then(data => {
+        this.props.signUserUp({
+          ...this.state,
+          membershipId: data.Response[0].membershipId
+        });
+      });
   };
 
   render() {

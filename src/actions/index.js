@@ -17,7 +17,8 @@ export function logUserIn(email, password) {
           user_id: data.id,
           membershipId: data.membershipId,
           gamertag: data.user,
-          platform: data.platform
+          platform: data.platform,
+          characters: [...data.characters]
         });
         localStorage.setItem('token', data.token);
       });
@@ -40,7 +41,8 @@ export function checkLoginStatus(token) {
           user_id: data.id,
           membershipId: data.membershipId,
           gamertag: data.gamertag,
-          platform: data.platform
+          platform: data.platform,
+          characters: [...data.characters]
         });
       });
   };
@@ -84,7 +86,7 @@ export function getPlayerCharacters(current_user) {
       .then(player => {
         dispatch({
           type: 'SET_CHARACTERS',
-          characters: [...player.Response.profile.data.characterIds]
+          characters: player.Response.profile.data.characterIds
         });
       });
   };
@@ -110,7 +112,7 @@ export function setPlayerInformation(current_user, character) {
           light: player.Response.character.data.light,
           race: player.Response.character.data.raceHash,
           gender: player.Response.character.data.genderHash,
-          class: player.Response.character.data.classHash,
+          player_class: player.Response.character.data.classHash,
           level: player.Response.character.data.levelProgression.level,
           player_emblem: player.Response.character.data.emblemBackgroundPath
         })

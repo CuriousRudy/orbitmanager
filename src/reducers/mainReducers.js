@@ -52,6 +52,7 @@ function setCharacters(state = { characterIds: [] }, action) {
   }
 }
 
+// add LOGIN USER dispatch handler for setting characters
 function setPlayerInformation(
   state = {
     characters: []
@@ -64,11 +65,34 @@ function setPlayerInformation(
         light: action.light,
         race: action.race,
         gender: action.gender,
-        class: action.class,
+        player_class: action.player_class,
         level: action.level,
         player_emblem: `https://www.bungie.net${action.player_emblem}`
       };
-      return { characters: [...state.characters, character] };
+      // debugger;
+      return {
+        characters: [...state.characters, character]
+      };
+    case 'LOGIN_USER':
+      let characters = [];
+      if (action.characters) {
+        action.characters.map(character => {
+          characters = [
+            ...characters,
+            {
+              light: character.light,
+              race: character.race,
+              gender: character.gender,
+              player_class: character.player_class,
+              level: character.level,
+              player_emblem: character.player_emblem
+            }
+          ];
+        });
+      }
+      return { characters: characters };
+    case 'LOGOUT_USER':
+      return { characters: [] };
     default:
       return state;
   }
