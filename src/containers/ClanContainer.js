@@ -6,7 +6,8 @@ import { Collapsible } from 'react-materialize';
 
 class ClanContainer extends React.Component {
   state = {
-    loading: true
+    loading: true,
+    search: ''
   };
   componentDidMount = () => {
     this.setState({ loading: true });
@@ -25,11 +26,18 @@ class ClanContainer extends React.Component {
     }
   };
 
+  handleChange = e => {
+    this.setState({
+      search: e.target.value
+    });
+  };
+
   render() {
     console.log(this.state, this.props);
+
     return (
       <div>
-        <h3>This has all the clans</h3>
+        <h3 style={{ textAlign: 'center' }}>Join a Clan</h3>
         <div className="row">
           <div className="col s4" />
           <div className="col s8">
@@ -37,6 +45,8 @@ class ClanContainer extends React.Component {
               <div className="input-field col s6">
                 {/* <i class="material-icons prefix">search</i> */}
                 <input
+                  onChange={e => this.handleChange(e)}
+                  value={this.state.search}
                   id="icon_prefix"
                   type="text"
                   className="validate"
@@ -54,9 +64,15 @@ class ClanContainer extends React.Component {
                   <div className="indeterminate" />
                 </div>
               ) : (
-                this.props.allClans.map((clan, i) => {
-                  return <ClanLister clan={clan} key={i} />;
-                })
+                this.props.allClans
+                  .filter(clan => {
+                    return clan.name
+                      .toLowerCase()
+                      .includes(this.state.search.toLowerCase());
+                  })
+                  .map((clan, i) => {
+                    return <ClanLister clan={clan} key={i} />;
+                  })
               )}
             </Collapsible>
           </div>

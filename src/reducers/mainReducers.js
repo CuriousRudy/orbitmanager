@@ -45,6 +45,19 @@ function toggleLogin(state = { status: false }, action) {
   }
 }
 
+function setPlayerClan(state = { clanId: null }, action) {
+  switch (action.type) {
+    case 'JOIN_CLAN':
+      return action.clan;
+    case 'LOGIN_USER':
+      return action.clan[0].id;
+    case 'LOGOUT_USER':
+      return null;
+    default:
+      return state;
+  }
+}
+
 //sets character id info for character import
 function setCharacters(state = { characterIds: [] }, action) {
   switch (action.type) {
@@ -122,7 +135,8 @@ const rootReducer = combineReducers({
   isLoggedIn: toggleLogin,
   characterIds: setCharacters,
   characterDetails: setPlayerInformation,
-  allClans: getClanInfo
+  allClans: getClanInfo,
+  clanId: setPlayerClan
 });
 
 export default rootReducer;
