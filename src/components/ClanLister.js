@@ -6,10 +6,10 @@ import { joinClan } from '../actions/index.js';
 class ClanLister extends React.Component {
   render() {
     return (
-      <CollapsibleItem header={this.props.clan.name} icon="filter_drama">
+      <CollapsibleItem header={this.props.clan.name}>
         <div className="row">
           <p>{this.props.clan.tagline}</p>
-          {this.props.clanId.clanId ? (
+          {this.props.clanId === null ? (
             <button
               className="btn-primary btn-floating"
               style={{ left: '90%' }}

@@ -78,6 +78,27 @@ export function signUserUp(user) {
   };
 }
 
+export function createClan(clanInfo) {
+  return dispatch => {
+    return fetch(`http://localhost:3000/api/v1/clans`, {
+      method: 'POST',
+      headers: {
+        accept: 'application/json',
+        'Content-Type': 'Application/json',
+        Authorization: localStorage.getItem('token')
+      },
+      body: JSON.stringify({ ...clanInfo })
+    })
+      .then(res => res.json())
+      .then(data => {
+        dispatch({
+          type: 'ADD_CLAN',
+          clan: data
+        });
+      });
+  };
+}
+
 export function joinClan(clanId) {
   return dispatch => {
     return fetch(`http://localhost:3000/api/v1/memberships`, {

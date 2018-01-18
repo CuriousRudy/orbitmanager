@@ -50,7 +50,9 @@ function setPlayerClan(state = { clanId: null }, action) {
     case 'JOIN_CLAN':
       return action.clan;
     case 'LOGIN_USER':
-      return action.clan[0].id;
+      if (action.clan[0]) {
+        return action.clan[0].id;
+      }
     case 'LOGOUT_USER':
       return null;
     default:
@@ -122,7 +124,10 @@ function getClanInfo(
 ) {
   switch (action.type) {
     case 'FETCH_CLANS':
-      return [...action.clans];
+      return { allClans: [...action.clans] };
+    case 'ADD_CLAN':
+      debugger;
+      return { allClans: [...state.allClans, action.clan] };
     case 'LOGOUT_USER':
       return [];
     default:
