@@ -3,7 +3,7 @@ import { LOGIN_USER } from './types.js';
 // logs the user in, sets player information to state
 export function logUserIn(email, password) {
   return dispatch => {
-    return fetch('http://localhost:3000/api/v1/auth', {
+    return fetch('https://blooming-mountain-49038.herokuapp.com/api/v1/auth', {
       method: 'POST',
       headers: {
         accept: 'application/json',
@@ -30,13 +30,16 @@ export function logUserIn(email, password) {
 //checks token for authentication, sets player information to state if valid
 export function checkLoginStatus(token) {
   return dispatch => {
-    return fetch('http://localhost:3000/api/v1/current_user', {
-      headers: {
-        'Content-Type': 'Application/json',
-        Accept: 'Application/json',
-        Authorization: token
+    return fetch(
+      'https://blooming-mountain-49038.herokuapp.com/api/v1/current_user',
+      {
+        headers: {
+          'Content-Type': 'Application/json',
+          Accept: 'Application/json',
+          Authorization: token
+        }
       }
-    })
+    )
       .then(res => res.json())
       .then(data => {
         dispatch({
@@ -55,7 +58,7 @@ export function checkLoginStatus(token) {
 //creates a new user in the database, sets player information to state
 export function signUserUp(user) {
   return dispatch => {
-    return fetch('http://localhost:3000/api/v1/users', {
+    return fetch('https://blooming-mountain-49038.herokuapp.com/api/v1/users', {
       method: 'POST',
       headers: {
         accept: 'application/json',
@@ -80,7 +83,7 @@ export function signUserUp(user) {
 
 export function createClan(clanInfo) {
   return dispatch => {
-    return fetch(`http://localhost:3000/api/v1/clans`, {
+    return fetch(`https://blooming-mountain-49038.herokuapp.com/api/v1/clans`, {
       method: 'POST',
       headers: {
         accept: 'application/json',
@@ -101,15 +104,18 @@ export function createClan(clanInfo) {
 
 export function joinClan(clanId) {
   return dispatch => {
-    return fetch(`http://localhost:3000/api/v1/memberships`, {
-      method: 'POST',
-      headers: {
-        accept: 'application/json',
-        'content-type': 'application/json',
-        Authorization: localStorage.getItem('token')
-      },
-      body: JSON.stringify({ clan_id: clanId })
-    })
+    return fetch(
+      `https://blooming-mountain-49038.herokuapp.com/api/v1/memberships`,
+      {
+        method: 'POST',
+        headers: {
+          accept: 'application/json',
+          'content-type': 'application/json',
+          Authorization: localStorage.getItem('token')
+        },
+        body: JSON.stringify({ clan_id: clanId })
+      }
+    )
       .then(res => res.json())
 
       .then(data =>
@@ -174,21 +180,24 @@ export function setPlayerInformation(current_user, character) {
 //posts the character details to the backend to persist the player's characters
 export function postCharacter(character) {
   return dispatch => {
-    return fetch(`http://localhost:3000/api/v1/characters`, {
-      method: 'POST',
-      headers: {
-        accept: 'application/json',
-        'content-type': 'application/json',
-        Authorization: localStorage.getItem('token')
-      },
-      body: JSON.stringify({ ...character })
-    });
+    return fetch(
+      `https://blooming-mountain-49038.herokuapp.com/api/v1/characters`,
+      {
+        method: 'POST',
+        headers: {
+          accept: 'application/json',
+          'content-type': 'application/json',
+          Authorization: localStorage.getItem('token')
+        },
+        body: JSON.stringify({ ...character })
+      }
+    );
   };
 }
 
 export function getAllClans() {
   return dispatch => {
-    return fetch(`http://localhost:3000/api/v1/clans`, {
+    return fetch(`https://blooming-mountain-49038.herokuapp.com/api/v1/clans`, {
       headers: {
         accept: 'application/json',
         'content-type': 'application/json',
