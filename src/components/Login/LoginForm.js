@@ -1,9 +1,9 @@
 import React from 'react';
-import { logUserIn } from '../actions/index.js';
+import { logUserIn } from '../../actions/index.js';
 import { Row, Input, Button, Icon, Col } from 'react-materialize';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import '../index.css';
+import '../../index.css';
 
 class LoginForm extends React.Component {
   state = {

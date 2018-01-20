@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getAllClans, createClan } from '../actions/index.js';
-import ClanLister from '../components/ClanLister';
-import { Collapsible, Tab, Tabs } from 'react-materialize';
+import ClanLister from '../components/Clan/ClanLister';
+import { Collapsible } from 'react-materialize';
 // import { Switch, Route } from 'react-router';
 
 class ClanContainer extends React.Component {
@@ -135,6 +135,11 @@ class ClanContainer extends React.Component {
                   name: this.state.name,
                   tagline: this.state.tagline
                 });
+                this.setState({
+                  name: '',
+                  tagline: '',
+                  showForm: true
+                });
               }}
               className="btn btn-floating"
             >
@@ -151,20 +156,18 @@ class ClanContainer extends React.Component {
           <ul>
             <div className="col s2" />
             <li className="col s4">
-              <div className="container">
-                <button
-                  className="btn btn-primary"
-                  onClick={() => this.toggleList()}
-                >
-                  Join a Clan
-                </button>
-              </div>
-            </li>
-            <div className="col s2" />
-            <li className="col s4">
-              <div className="container" />
               <button
-                className="btn btn-primary"
+                style={{ width: '100%' }}
+                className="btn btn-flat waves-effect waves-dark"
+                onClick={() => this.toggleList()}
+              >
+                Join a Clan
+              </button>
+            </li>
+            <li className="col s4">
+              <button
+                style={{ width: '100%' }}
+                className="btn btn-flat waves-effect waves-dark"
                 onClick={() => this.toggleForm()}
               >
                 Create A Clan
@@ -172,10 +175,6 @@ class ClanContainer extends React.Component {
             </li>
           </ul>
         </div>
-        {/* <Switch>
-          <Route exact path="/clanList" component={clanList}></Route>
-          <Route exact path="/newClan" component={newClanForm} </Route>
-        </Switch> */}
         <div>{this.state.showForm ? clanList : newClanForm}</div>
       </div>
     );

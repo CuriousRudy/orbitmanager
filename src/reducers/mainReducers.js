@@ -70,6 +70,33 @@ function setCharacters(state = { characterIds: [] }, action) {
   }
 }
 
+function getForums(state = { allForums: [] }, action) {
+  switch (action.type) {
+    case 'FETCH_FORUMS':
+      return { allForums: [...action.forums] };
+    default:
+      return state;
+  }
+}
+
+function setForum(state = { displayedForum: '' }, action) {
+  switch (action.type) {
+    case 'SET_FORUM':
+      return action.forum;
+    default:
+      return state;
+  }
+}
+
+function setMessages(state = { messages: [] }, action) {
+  switch (action.type) {
+    case 'SET_MESSAGES':
+      return { messages: [...action.messages] };
+    default:
+      return state;
+  }
+}
+
 // sets the information for each player character
 function setPlayerInformation(
   state = {
@@ -141,7 +168,10 @@ const rootReducer = combineReducers({
   characterIds: setCharacters,
   characterDetails: setPlayerInformation,
   allClans: getClanInfo,
-  clanId: setPlayerClan
+  clanId: setPlayerClan,
+  allForums: getForums,
+  displayedForum: setForum,
+  currentForumMessages: setMessages
 });
 
 export default rootReducer;

@@ -1,50 +1,70 @@
 import React from 'react';
 import MemberList from '../components/memberList';
-import ForumMessages from '../components/ForumMessages';
+import ForumMessages from '../components/Forum/ForumMessages';
 import ForumList from './ForumList';
-// import { checkLoginStatus } from '../actions/index.js';
+import { fetchForums, createMessage } from '../actions/index.js';
 import { connect } from 'react-redux';
-import { Row, Col } from 'react-materialize';
+import { Row, Col, Collapsible, CollapsibleItem } from 'react-materialize';
 import '../index.css';
 
 class ForumContainer extends React.Component {
+  state = {
+    content: ''
+  };
+
+  componentDidMount = () => {
+    this.props.fetchForums();
+  };
+
+  updateMessage = e => {
+    this.setState({
+      content: e.target.value
+    });
+  };
   render() {
+    console.log(this.props);
     // const forums = forums.map(forum => {
     // return <ForumLink />
     // })
     return (
       <div>
         <ForumList />
-        <div className="container">
+        <div>
           <Row>
-            <Col s={3}>
-              <h3>Members</h3>
-              <div>
-                <MemberList />
-              </div>
+            <Col offset="s1" s={3}>
+              <Collapsible s={12} defaultActiveKey={0}>
+                <CollapsibleItem selected header="Forum info">
+                  This is some information about the forum that you are looking
+                  at
+                </CollapsibleItem>
+              </Collapsible>
+              <Collapsible s={12}>
+                <CollapsibleItem header="Forum info">
+                  Type your message below:
+                  <textarea
+                    id="textarea1"
+                    className="materialize-textarea"
+                    value={this.state.content}
+                    onChange={e => this.updateMessage(e)}
+                  />
+                  <label for="textarea1">Textarea</label>
+                  <br />
+                  <button
+                    onClick={() => {
+                      this.props.createMessage(
+                        this.props.displayedForum,
+                        this.state.content
+                      );
+                      this.setState({ content: '' });
+                    }}
+                    className="btn btn-floating waves-effect waves-dark pulse"
+                  />
+                </CollapsibleItem>
+              </Collapsible>
             </Col>
-            <Col s={9}>
-              <h3> This is a forum message window.</h3>
+            <Col s={7}>
               <div id="messageSpace">
-                <ForumMessages />
-              </div>
-            </Col>
-            <Col s={12}>
-              <div>
-                {/* <p>
-                  all of the messages are shown here, probably with overflow:
-                  scroll; to make for a compact ux, with all of the content,
-                  regardless of the length of the thread. the Reddit style
-                  thread could be nice, but would require each post/message to
-                  be aware of it's parent to nest properly...🤔
-                </p>
-                <p>
-                  all of the messages are shown here, probably with overflow:
-                  scroll; to make for a compact ux, with all of the content,
-                  regardless of the length of the thread. the Reddit style
-                  thread could be nice, but would require each post/message to
-                  be aware of it's parent to nest properly...🤔
-                </p> */}
+                <ForumMessages forumId={this.props.displayedForum} />
               </div>
             </Col>
           </Row>
@@ -58,4 +78,6 @@ const mapStateToProps = state => {
   return state;
 };
 
-export default connect(mapStateToProps)(ForumContainer);
+export default connect(mapStateToProps, { fetchForums, createMessage })(
+  ForumContainer
+);

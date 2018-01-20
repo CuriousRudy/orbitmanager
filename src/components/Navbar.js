@@ -12,7 +12,7 @@ class NavBar extends React.Component {
   };
 
   render() {
-    console.log('nav mounted', this.props);
+    // console.log('nav mounted', this.props);
     return (
       <nav>
         <div className="nav-wrapper blue-grey darken-2">
@@ -28,6 +28,9 @@ class NavBar extends React.Component {
             </li>
             <li>
               <NavLink to="/forum">Forum</NavLink>
+            </li>
+            <li>
+              <NavLink to="/LFG">LFG</NavLink>
             </li>
             <li>
               <NavLink to="/clans">Clans</NavLink>

@@ -4,13 +4,14 @@ import { checkLoginStatus, getPlayerCharacters } from './actions/index.js';
 import './App.css';
 import './index.css';
 import { Route, Switch, withRouter } from 'react-router-dom';
-import DashContainer from './containers/dashContainer';
-import ClanContainer from './containers/ClanContainer';
-import LoginForm from './components/LoginForm';
-import SignupForm from './components/SignupForm';
 import NavBar from './components/Navbar';
 import Welcome from './components/Welcome';
+import LoginForm from './components//Login/LoginForm';
+import SignupForm from './components/Login/SignupForm';
+import DashContainer from './containers/dashContainer';
+import ClanContainer from './containers/ClanContainer';
 import ForumContainer from './containers/forumContainer';
+import GroupContainer from './containers/GroupContainer';
 
 class App extends Component {
   componentDidMount = () => {
@@ -33,6 +34,7 @@ class App extends Component {
             <Route exact path="/dashboard" component={DashContainer} />
             <Route exact path="/forum" component={ForumContainer} />
             <Route exact path="/clans" component={ClanContainer} />
+            <Route exact path="/LFG" component={GroupContainer} />
           </Switch>
         </div>
         <div>

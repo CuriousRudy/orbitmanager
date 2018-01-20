@@ -5,9 +5,9 @@ import {
   signUserUp,
   getPlayerCharacters,
   setPlayerInformation
-} from '../actions/index.js';
+} from '../../actions/index.js';
 import CharactersSetup from './CharactersSetup';
-import '../index.css';
+import '../../index.css';
 
 class SignupForm extends React.Component {
   state = {
@@ -159,10 +159,6 @@ const mapStateToProps = state => {
     ...state
   };
 };
-
-// const mapDispatchToProps = dispatch => {
-//   return { signUserUp: () => dispatch(signUserUp()) };
-// };
 
 export default connect(mapStateToProps, {
   signUserUp,

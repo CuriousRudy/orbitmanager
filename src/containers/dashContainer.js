@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getPlayerCharacters } from '../actions/index.js';
 import Character from '../components/Character';
+import { Collapsible, CollapsibleItem } from 'react-materialize';
 
 class DashContainer extends React.Component {
   render() {
@@ -10,12 +11,25 @@ class DashContainer extends React.Component {
     });
     console.log('dash mounted', this.props);
     return (
-      <div className="blue-grey lighten-2" style={{ height: '75vh' }}>
+      <div className="blue-grey lighten-2" style={{ height: '100vh' }}>
         <div className="row">
-          <h5 style={{ textAlign: 'center' }}>Clan Details</h5>
+          <div className="col s12">
+            <Collapsible>
+              <CollapsibleItem header="Your Activity">
+                <p>this has some information</p>
+              </CollapsibleItem>
+            </Collapsible>
+          </div>
         </div>
-        <h5 style={{ textAlign: 'center' }}>Dashboard</h5>
-        <div className="row">{characters}</div>
+        <div className="row">
+          <div className="col s12">
+            <Collapsible>
+              <CollapsibleItem header="Your Guardians">
+                <div className="row">{characters}</div>
+              </CollapsibleItem>
+            </Collapsible>
+          </div>
+        </div>
       </div>
     );
   }

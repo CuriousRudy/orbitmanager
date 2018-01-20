@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { CollapsibleItem, Toast } from 'react-materialize';
-import { joinClan } from '../actions/index.js';
+import { CollapsibleItem } from 'react-materialize';
+import { joinClan } from '../../actions/index.js';
 
 class ClanLister extends React.Component {
   render() {

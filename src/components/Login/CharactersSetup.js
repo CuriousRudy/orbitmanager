@@ -1,9 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getPlayerCharacters, setPlayerInformation } from '../actions/index.js';
-import Character from './Character';
+import {
+  getPlayerCharacters,
+  setPlayerInformation
+} from '../../actions/index.js';
+import Character from '../Character';
 import { Row } from 'react-materialize';
-import '../index.css';
+import '../../index.css';
 
 class CharactersSetup extends React.Component {
   componentDidMount = () => {
