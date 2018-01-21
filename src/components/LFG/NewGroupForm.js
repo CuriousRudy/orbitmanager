@@ -5,27 +5,73 @@ import { Input } from 'react-materialize';
 class NewGroupForm extends React.Component {
   state = {
     party_size: '',
-    game_mode: '',
+    game_mode: 'Raid',
     difficulty: ''
+  };
+
+  changeForm = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
   };
   render() {
     return (
       <div className="row">
         <div className="col s12">
           <div className="row">
-            <div className="input-field col s6">
-              <input type="text" />
-            </div>
-            <div className="input-field col s6">
-              <input type="text" />
-            </div>
+            <Input
+              name="game_mode"
+              onChange={e => this.changeForm(e)}
+              s={4}
+              type="select"
+              defaultValue="1"
+            >
+              <option value="Raid">Raid</option>
+              <option value="Nightfall">Nightfall</option>
+              <option value="PvP">PvP</option>
+            </Input>
+            <Input
+              name="difficulty"
+              onChange={e => this.changeForm(e)}
+              s={4}
+              type="select"
+              defaultValue="1"
+            >
+              <option value="Normal">Normal</option>
+              <option value="Prestige">Prestige</option>
+            </Input>
+            <Input name="on" type="date" onChange={function(e, value) {}} />
           </div>
           <div className="row">
-            <Input s={4} type="select" defaultValue="1">
-              <option value="1">Option 1</option>
-              <option value="2">Option 2</option>
-              <option value="3">Option 3</option>
-            </Input>
+            {this.state.game_mode === 'Raid' ? (
+              <Input
+                s={4}
+                name="party_size"
+                onChange={e => this.changeForm(e)}
+                type="select"
+                defaultValue="1"
+              >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+              </Input>
+            ) : (
+              <Input
+                s={4}
+                onChange={e => this.changeForm(e)}
+                name="party_size"
+                type="select"
+                defaultValue="1"
+              >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </Input>
+            )}
+
             <Input name="on" type="date" onChange={function(e, value) {}} />
           </div>
         </div>
