@@ -1,5 +1,29 @@
 import { LOGIN_USER } from './types.js';
 
+export function dailyStatus() {
+  return dispatch => {
+    return (
+      fetch('https://www.bungie.net/Platform/Destiny2/Milestones/', {
+        headers: {
+          'x-api-key': '1e8df2625cb24d04938314296f91f366'
+        }
+      })
+        .then(res => res.json())
+        // .then(data =>
+        //   console.log(
+        //     data.Response[3660836525].availableQuests[0].activity.variants[0]
+        //   )
+        // );
+        .then(data =>
+          dispatch({
+            type: 'MILESTONES',
+            milestones: data.Response
+          })
+        )
+    );
+  };
+}
+
 // logs the user in, sets player information to state
 export function logUserIn(email, password) {
   return dispatch => {
@@ -20,7 +44,7 @@ export function logUserIn(email, password) {
           gamertag: data.user,
           platform: data.platform,
           characters: [...data.characters],
-          clan: data.clan
+          clan: data.clan[0]
         });
         localStorage.setItem('token', data.token);
       });
@@ -49,7 +73,7 @@ export function checkLoginStatus(token) {
           gamertag: data.gamertag,
           platform: data.platform,
           characters: [...data.characters],
-          clan: data.clan
+          clan: data.clan[0]
         });
       });
   };

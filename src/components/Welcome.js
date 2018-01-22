@@ -1,14 +1,15 @@
 import React from 'react';
 // import { checkLoginStatus } from '../actions/index.js';
 import { Slider, Slide } from 'react-materialize';
+import NavBar from './Navbar';
 
 class Welcome extends React.Component {
   render() {
     return (
       <div>
-        <Slider>
+        <Slider fullscreen={true}>
           <Slide
-            src="https://s3.amazonaws.com/destiny-www/assets/editorial/2016/07/Rise_Of_Iron_Raid_Boss.jpg"
+            src="http://www.stayontargetpodcast.com/wp-content/uploads/2017/10/Destiny2Leviathan.jpg"
             title="Welcome to OrbitManager"
             className="blue-grey darken-4"
           />
@@ -22,6 +23,13 @@ class Welcome extends React.Component {
           <Slide
             src="http://www.co-optimus.com/images/upload/image/2014/destiny-ships-screen-02-ps4-us-07jul14.jpg"
             title="Clan Fireteam Manager"
+            placement="right"
+          >
+            Schedule Raids and more...
+          </Slide>
+          <Slide
+            src="https://i2.wp.com/www.destinycarrycorp.com/wp-content/uploads/2017/09/edz_public_event_04.jpg?fit=1920%2C1080&ssl=1"
+            title="Something else interesting"
             placement="right"
           >
             Schedule Raids and more...

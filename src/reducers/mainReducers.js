@@ -2,6 +2,15 @@ import { combineReducers } from 'redux';
 
 let state;
 
+function milestones(state = null, action) {
+  switch (action.type) {
+    case 'MILESTONES':
+      return action.milestones;
+    default:
+      return state;
+  }
+}
+
 //handles the login user credentials
 function userLogin(
   state = {
@@ -50,8 +59,8 @@ function setPlayerClan(state = { clanId: null }, action) {
     case 'JOIN_CLAN':
       return action.clan;
     case 'LOGIN_USER':
-      if (action.clan[0]) {
-        return action.clan[0].id;
+      if (action.clan) {
+        return action.clan.id;
       }
     case 'LOGOUT_USER':
       return null;
@@ -182,7 +191,8 @@ const rootReducer = combineReducers({
   allForums: getForums,
   displayedForum: setForum,
   currentForumMessages: setMessages,
-  groupsList: getGroups
+  groupsList: getGroups,
+  milestones: milestones
 });
 
 export default rootReducer;
