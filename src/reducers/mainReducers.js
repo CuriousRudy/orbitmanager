@@ -70,6 +70,16 @@ function setCharacters(state = { characterIds: [] }, action) {
   }
 }
 
+function getGroups(state = { groups: [] }, action) {
+  switch (action.type) {
+    case 'FETCH_GROUPS':
+      return [...action.groups];
+    case 'ADD_GROUP':
+      return [...state, action.group];
+    default:
+      return state;
+  }
+}
 function getForums(state = { allForums: [] }, action) {
   switch (action.type) {
     case 'FETCH_FORUMS':
@@ -171,7 +181,8 @@ const rootReducer = combineReducers({
   clanId: setPlayerClan,
   allForums: getForums,
   displayedForum: setForum,
-  currentForumMessages: setMessages
+  currentForumMessages: setMessages,
+  groupsList: getGroups
 });
 
 export default rootReducer;

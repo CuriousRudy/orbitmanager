@@ -5,19 +5,15 @@ import { connect } from 'react-redux';
 import { getMessages } from '../../actions/index.js';
 
 class ForumMessages extends React.Component {
-  state = {
-    loading: true
+  componentDidMount = () => {
+    this.props.getMessages(this.props.forumId);
   };
   componentWillReceiveProps = nextProps => {
     if (nextProps.displayedForum !== this.props.displayedForum) {
       this.props.getMessages(nextProps.displayedForum);
     }
-    this.setState({ loading: false });
   };
 
-  shouldComponentUpdate = nextProps => {
-    return nextProps.displayedForum !== this.props.displayedForum;
-  };
   render() {
     const messageList = this.props.currentForumMessages.messages.map(
       (message, i) => {

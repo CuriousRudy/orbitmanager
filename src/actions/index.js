@@ -140,6 +140,47 @@ export function fetchForums() {
   };
 }
 
+export function fetchGroups() {
+  return dispatch => {
+    return fetch('http://localhost:3000/api/v1/groups', {
+      headers: {
+        accept: 'application/json',
+        'content-type': 'application/json',
+        Authorization: localStorage.getItem('token')
+      }
+    })
+      .then(res => res.json())
+      .then(data =>
+        dispatch({
+          type: 'FETCH_GROUPS',
+          groups: data
+        })
+      );
+  };
+}
+
+export function createGroup(group) {
+  return dispatch => {
+    return fetch('http://localhost:3000/api/v1/groups', {
+      method: 'POST',
+      headers: {
+        accept: 'application/json',
+        'Content-Type': 'Application/json',
+        Authorization: localStorage.getItem('token')
+      },
+      body: JSON.stringify({ group })
+    })
+      .then(res => res.json())
+
+      .then(data => {
+        dispatch({
+          type: 'ADD_GROUP',
+          group: data
+        });
+      });
+  };
+}
+
 export function getMessages(forumId) {
   return dispatch => {
     // debugger;

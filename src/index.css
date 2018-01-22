@@ -18,6 +18,10 @@ nav {
   overflow: hidden;
 }
 
+/* nav.dropdown-content {
+  overflow: scroll;
+} */
+
 .memberList {
   overflow-y: scroll;
   height: 35vh;

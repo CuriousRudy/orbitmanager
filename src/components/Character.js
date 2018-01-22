@@ -19,6 +19,45 @@ class Character extends React.Component {
     this.props.postCharacter(this.props.character);
     this.setState({ clicked: true });
   };
+
+  //needs one more switch to set the background of the character card for the class type
+
+  setClassName = className => {
+    switch (className) {
+      case '2271682572':
+        return 'Warlock';
+      case '3655393761':
+        return 'Titan';
+      case '671679327':
+        return 'Hunter';
+      default:
+        return 'Guardian';
+    }
+  };
+
+  setRace = raceHash => {
+    switch (raceHash) {
+      case '2803282938':
+        return 'Awoken';
+      case '3887404748':
+        return 'Human';
+      case '898834093':
+        return 'Exo';
+      default:
+        return 'Hmmm...';
+    }
+  };
+
+  setGender = genderHash => {
+    switch (genderHash) {
+      case '2204441813':
+        return 'Female';
+      case '3111576190':
+        return 'Male';
+      default:
+        return 'Male';
+    }
+  };
   render() {
     const buttons = !this.state.clicked ? (
       <Button onClick={() => this.importCharacter()}>Import</Button>
@@ -53,15 +92,15 @@ class Character extends React.Component {
                   waves="light"
                 />
               }
-              title={`Class: ${this.props.character.player_class}`}
+              title={this.setClassName(this.props.character.player_class)}
               reveal={
                 <div>
-                  <p>Light: {this.props.character.light}</p>
+                  <p>{this.props.character.light} Light</p>
                   <p>
-                    About:{' '}
-                    {`${this.props.character.race} ${
-                      this.props.character.gender
-                    }`}
+                    {`${this.setRace(this.props.character.race)}
+                      ${this.setGender(this.props.character.gender)}
+                      ${this.setClassName(this.props.character.player_class)}
+                    `}
                   </p>
                 </div>
               }

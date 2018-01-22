@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Input } from 'react-materialize';
+// import { createGroup } from '../../actions/index.js';
 
 class NewGroupForm extends React.Component {
   state = {
@@ -71,8 +72,13 @@ class NewGroupForm extends React.Component {
                 <option value="3">3</option>
               </Input>
             )}
-
-            <Input name="on" type="date" onChange={function(e, value) {}} />
+            <div className="col s1" />
+            <button
+              onClick={() => this.props.createGroup(this.state)}
+              className="col s4 btn btn-flat"
+            >
+              create
+            </button>
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import MemberList from '../components/memberList';
+// import MemberList from '../components/memberList';
 import ForumMessages from '../components/Forum/ForumMessages';
 import ForumList from './ForumList';
 import { fetchForums, createMessage } from '../actions/index.js';
@@ -64,7 +64,13 @@ class ForumContainer extends React.Component {
             </Col>
             <Col s={7}>
               <div id="messageSpace">
-                <ForumMessages forumId={this.props.displayedForum} />
+                {this.props.displayedForum ? (
+                  <ForumMessages forumId={this.props.displayedForum} />
+                ) : (
+                  <div className="progress">
+                    <div className="indeterminate" />
+                  </div>
+                )}
               </div>
             </Col>
           </Row>

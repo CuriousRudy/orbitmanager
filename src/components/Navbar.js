@@ -29,6 +29,24 @@ class NavBar extends React.Component {
             <li>
               <NavLink to="/forum">Forum</NavLink>
             </li>
+            {/* <ul id="dropdown1" className="dropdown-content">
+              <li>
+                <NavLink to="/LFG">LFG</NavLink>
+              </li>
+              <li>
+                <a href="#!">Create Group</a>
+              </li>
+              <li className="divider" />
+            </ul>
+            <li>
+              <a
+                className="dropdown-button"
+                href="#!"
+                data-activates="dropdown1"
+              >
+                Dropdown
+              </a>
+            </li> */}
             <li>
               <NavLink to="/LFG">LFG</NavLink>
             </li>

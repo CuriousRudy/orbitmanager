@@ -54,7 +54,7 @@ class ClanContainer extends React.Component {
   };
 
   render() {
-    console.log('container is mounting', this.state);
+    // console.log('container is mounting', this.state);
     const clanList = (
       <div id="test1" className="col s12 ">
         <div className="row">
@@ -78,11 +78,7 @@ class ClanContainer extends React.Component {
         <div className="container">
           <div className="col s12 ">
             <Collapsible popout accordion>
-              {this.state.loading ? (
-                <div className="progress">
-                  <div className="indeterminate" />
-                </div>
-              ) : (
+              {this.props.allClans.allClans ? (
                 this.props.allClans.allClans
                   .filter(clan => {
                     return clan.name
@@ -92,6 +88,10 @@ class ClanContainer extends React.Component {
                   .map((clan, i) => {
                     return <ClanLister clan={clan} key={i} />;
                   })
+              ) : (
+                <div className="progress">
+                  <div className="indeterminate" />
+                </div>
               )}
             </Collapsible>
           </div>
