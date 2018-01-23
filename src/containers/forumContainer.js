@@ -2,27 +2,28 @@ import React from 'react';
 // import MemberList from '../components/memberList';
 import ForumMessages from '../components/Forum/ForumMessages';
 import ForumList from './ForumList';
-import { fetchForums, createMessage } from '../actions/index.js';
+import { fetchForums, createMessage, createForum } from '../actions/index.js';
 import { connect } from 'react-redux';
 import { Row, Col, Collapsible, CollapsibleItem } from 'react-materialize';
 import '../index.css';
 
 class ForumContainer extends React.Component {
   state = {
-    content: ''
+    content: '',
+    title: ''
   };
 
   componentDidMount = () => {
     this.props.fetchForums();
   };
 
-  updateMessage = e => {
+  updateForm = e => {
     this.setState({
-      content: e.target.value
+      [e.target.name]: e.target.value
     });
   };
   render() {
-    console.log(this.props);
+    console.log(this.state);
     // const forums = forums.map(forum => {
     // return <ForumLink />
     // })
@@ -43,9 +44,10 @@ class ForumContainer extends React.Component {
                   Type your message below:
                   <textarea
                     id="textarea1"
+                    name="content"
                     className="materialize-textarea"
                     value={this.state.content}
-                    onChange={e => this.updateMessage(e)}
+                    onChange={e => this.updateForm(e)}
                   />
                   <label for="textarea1">Textarea</label>
                   <br />
@@ -58,6 +60,23 @@ class ForumContainer extends React.Component {
                       this.setState({ content: '' });
                     }}
                     className="btn btn-floating waves-effect waves-dark pulse"
+                  />
+                </CollapsibleItem>
+              </Collapsible>
+              <Collapsible>
+                <CollapsibleItem header="Start a New Thread">
+                  <input
+                    type="text"
+                    name="title"
+                    onChange={e => this.updateForm(e)}
+                    value={this.state.title}
+                  />
+                  <button
+                    onClick={() => {
+                      this.props.createForum(this.state.title);
+                      this.setState({ title: '' });
+                    }}
+                    className="btn btn-floating waves-effect waves-dark"
                   />
                 </CollapsibleItem>
               </Collapsible>
@@ -84,6 +103,8 @@ const mapStateToProps = state => {
   return state;
 };
 
-export default connect(mapStateToProps, { fetchForums, createMessage })(
-  ForumContainer
-);
+export default connect(mapStateToProps, {
+  fetchForums,
+  createMessage,
+  createForum
+})(ForumContainer);

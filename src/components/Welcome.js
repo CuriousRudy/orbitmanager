@@ -1,7 +1,6 @@
 import React from 'react';
 // import { checkLoginStatus } from '../actions/index.js';
 import { Slider, Slide } from 'react-materialize';
-import NavBar from './Navbar';
 
 class Welcome extends React.Component {
   render() {

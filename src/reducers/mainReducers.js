@@ -93,12 +93,14 @@ function getForums(state = { allForums: [] }, action) {
   switch (action.type) {
     case 'FETCH_FORUMS':
       return { allForums: [...action.forums] };
+    case 'CREATE_FORUM':
+      return { allForums: [...state.allForums, action.forum] };
     default:
       return state;
   }
 }
 
-function setForum(state = { displayedForum: '' }, action) {
+function setForum(state = '', action) {
   switch (action.type) {
     case 'SET_FORUM':
       return action.forum;
@@ -111,6 +113,8 @@ function setMessages(state = { messages: [] }, action) {
   switch (action.type) {
     case 'SET_MESSAGES':
       return { messages: [...action.messages] };
+    case 'CREATE_MESSAGE':
+      return { messages: [...state.messages, action.message] };
     default:
       return state;
   }

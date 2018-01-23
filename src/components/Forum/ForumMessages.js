@@ -6,7 +6,9 @@ import { getMessages } from '../../actions/index.js';
 
 class ForumMessages extends React.Component {
   componentDidMount = () => {
-    this.props.getMessages(this.props.forumId);
+    if (this.props.displayedForum) {
+      this.props.getMessages(this.props.forumId);
+    }
   };
   componentWillReceiveProps = nextProps => {
     if (nextProps.displayedForum !== this.props.displayedForum) {

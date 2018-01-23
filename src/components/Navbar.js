@@ -15,10 +15,7 @@ class NavBar extends React.Component {
     // console.log('nav mounted', this.props);
     return (
       <nav>
-        <div
-          style={{ 'z-index': '3' }}
-          className="nav-wrapper blue-grey darken-2"
-        >
+        <div style={{ zIndex: '3' }} className="nav-wrapper blue-grey darken-2">
           <NavLink to="/">
             <img
               alt="an old crest, the fallen symbol of the Tower's Old Vanguard"
