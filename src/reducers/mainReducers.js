@@ -1,7 +1,5 @@
 import { combineReducers } from 'redux';
 
-let state;
-
 function milestones(state = null, action) {
   switch (action.type) {
     case 'MILESTONES':
@@ -62,6 +60,7 @@ function setPlayerClan(state = { clanId: null }, action) {
       if (action.clan) {
         return action.clan.id;
       }
+      break;
     case 'LOGOUT_USER':
       return null;
     default:
@@ -85,6 +84,23 @@ function getGroups(state = { groups: [] }, action) {
       return [...action.groups];
     case 'ADD_GROUP':
       return [...state, action.group];
+    case 'JOIN_GROUP':
+      // debugger;
+      const target = state.find(x => {
+        return x.id === action.group.id;
+      });
+      let index = state.indexOf(target);
+      // debugger;
+      if (index === state.length) {
+        return [...state.slice(0, index), { ...action.group }];
+      } else {
+        return [
+          ...state.slice(0, index),
+          { ...action.group },
+          ...state.slice(index + 1)
+        ];
+      }
+
     default:
       return state;
   }
@@ -144,7 +160,7 @@ function setPlayerInformation(
     case 'LOGIN_USER':
       let characters = [];
       if (action.characters) {
-        action.characters.map(character => {
+        action.characters.forEach(character => {
           characters = [
             ...characters,
             {

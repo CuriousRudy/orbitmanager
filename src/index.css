@@ -4,18 +4,21 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  font-family: sans-serif;
+  width: 100%;
+  font-family: GillSans, Calibri, Trebuchet, sans-serif;
 }
 
 #the-one {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
+  width: 100vw;
+
+  min-height: auto;
+
   justify-content: space-between;
 }
 
 nav {
-  overflow: hidden;
+  overflow-y: hidden;
+  overflow-x: visible;
 }
 
 /* nav.dropdown-content {
@@ -27,15 +30,15 @@ nav {
   height: 35vh;
 }
 
-#messageSpace {
+.messageSpace {
   width: 100%;
-  height: 60vh;
+  height: 80vh;
   overflow-y: scroll;
 }
 
-#my-butt {
+/* #my-butt {
   float: right;
-}
+} */
 
 #big-title {
   text-align: center;
@@ -45,4 +48,28 @@ nav {
 }
 /* #page-footer {
   bottom: 0;
+} */
+
+.userView div.background {
+  min-height: 300px;
+  width: 245px;
+}
+
+ul.side-nav {
+  background-color: #90a4ae;
+}
+
+ul.with-header {
+  border: hidden;
+}
+
+div#login-slider div.slider ul.slides {
+  height: 700px !important;
+}
+
+/* div.collapsible-header {
+  border: hidden;
+  margin: 0px;
+  border-top: hidden;
+  background-color: #90a4ae;
 } */

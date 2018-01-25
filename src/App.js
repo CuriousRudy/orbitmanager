@@ -24,8 +24,8 @@ class App extends Component {
   render() {
     // console.log('app mounted', this.props);
     return (
-      <div id="the-one">
-        <div>
+      <div style={{ width: '100%' }}>
+        <div className="blue-grey lighten-4">
           <NavBar />
           <Switch>
             <Route exact path="/" component={Welcome} />
@@ -42,9 +42,9 @@ class App extends Component {
             id="page-footer"
             style={{
               bottom: 0,
-              width: '100vw'
+              width: 'auto'
             }}
-            className="page-footer blue-grey darken-3"
+            className="page-footer blue-grey darken-4"
           >
             <div className="container">
               <div className="row">

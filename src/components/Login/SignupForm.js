@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Input, Button, Col } from 'react-materialize';
+import { Input } from 'react-materialize';
 import { connect } from 'react-redux';
 import {
   signUserUp,
@@ -51,102 +51,106 @@ class SignupForm extends React.Component {
   };
 
   render() {
-    // console.log(this.props);
+    console.log(this.state);
     return (
-      <div className="container signer">
+      <div style={{ height: '100vh' }} className="blue-grey lighten-2">
+        <br />
+        <br />
         {this.props.isLoggedIn.status ? (
-          <CharactersSetup />
+          <div className="row">
+            <div className="col s12">
+              <div className="col s1" />
+              <CharactersSetup />
+            </div>
+          </div>
         ) : (
-          <div>
-            <Row>
-              <Col s={7}>
-                <div>
-                  <h4>Account Signup</h4>
-                  <Input
-                    s={6}
-                    onChange={e => this.updateForm(e)}
-                    type="text"
-                    name="first_name"
-                    value={this.state.first_name}
-                    placeholder="First Name"
-                  />
-
-                  <Input
-                    s={6}
-                    onChange={e => this.updateForm(e)}
-                    type="text"
-                    name="last_name"
-                    value={this.state.last_name}
-                    placeholder="Last Name"
-                  />
-
-                  <Input
-                    s={7}
-                    onChange={e => this.updateForm(e)}
-                    type="email"
-                    name="email"
-                    value={this.state.email}
-                    placeholder="Email"
-                  />
-
-                  <Input
-                    s={5}
-                    onChange={e => this.updateForm(e)}
-                    type="password"
-                    name="password"
-                    value={this.state.password}
-                    placeholder="Password"
-                  />
+          <div className="row">
+            <div className="col s1" />
+            <div className="col s10">
+              <div className="card col s12 blue-grey darken-2">
+                <div className="card-content yellow-text text-darken-2">
+                  <span className="card-title">Card Title</span>
+                  <div className="row">
+                    <div className="col s12">
+                      <div className="col s8">
+                        <input
+                          className="input-field yellow-text text-darken-2 col s5"
+                          onChange={e => this.updateForm(e)}
+                          type="text"
+                          name="first_name"
+                          value={this.state.first_name}
+                          placeholder="First Name"
+                        />
+                        <div className="col s1" />
+                        <input
+                          className="input-field yellow-text text-darken-2 col s4"
+                          onChange={e => this.updateForm(e)}
+                          type="text"
+                          name="last_name"
+                          value={this.state.last_name}
+                          placeholder="Last Name"
+                        />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <input
+                          className="input-field yellow-text text-darken-2 col s5"
+                          onChange={e => this.updateForm(e)}
+                          type="email"
+                          name="email"
+                          value={this.state.email}
+                          placeholder="Email"
+                        />
+                        <div className="col s1" />
+                        <input
+                          className="input-field yellow-text text-darken-2 col s4"
+                          onChange={e => this.updateForm(e)}
+                          type="password"
+                          name="password"
+                          value={this.state.password}
+                          placeholder="Password"
+                        />
+                      </div>
+                      <div className="col s4">
+                        <input
+                          className="input-field yellow-text text-darken-2 col s12 "
+                          onChange={e => this.updateForm(e)}
+                          type="text"
+                          name="gamertag"
+                          value={this.state.gamertag}
+                          placeholder="Gamertag (should have option for icon)"
+                        />
+                        <Input
+                          s={4}
+                          type="select"
+                          label="Platform"
+                          name="platform"
+                          value={this.state.platform}
+                          onChange={e => this.updateForm(e)}
+                        >
+                          <option value="2">PSN</option>
+                          <option value="1">XBL</option>
+                        </Input>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </Col>
-              <Col s={5}>
-                <h4>Character Info</h4>
-                <Input
-                  s={8}
-                  onChange={e => this.updateForm(e)}
-                  type="text"
-                  name="gamertag"
-                  value={this.state.gamertag}
-                  placeholder="Gamertag (should have option for icon)"
-                />
-                <Input
-                  s={4}
-                  type="select"
-                  label="Platform"
-                  name="platform"
-                  value={this.state.platform}
-                  onChange={e => this.updateForm(e)}
-                >
-                  <option value="2">PSN</option>
-                  <option value="1">XBL</option>
-                </Input>
-                {/* <Input
-              s={8}
-              onChange={e => this.updateForm(e)}
-              type="text"
-              name="main_class"
-              value={this.state.main_class}
-              placeholder="Main Toon- should be selector for 3 classes"
-            /> */}
-              </Col>
-            </Row>
-            <Row>
-              <Button
-                id="my-butt"
-                floating
-                large
-                className="blue-grey"
-                waves="light"
-                icon="Go"
-                fixed="true"
-                onClick={() => {
-                  this.getMembershipId(
-                    this.state.gamertag,
-                    this.state.platform
-                  );
-                }}
-              />
-            </Row>
+                <div className="card-action">
+                  <button
+                    className="btn-flat right yellow darken-2 waves-effect waves-light"
+                    onClick={() => {
+                      this.getMembershipId(
+                        this.state.gamertag,
+                        this.state.platform
+                      );
+                    }}
+                  >
+                    Create Profile
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         )}
       </div>

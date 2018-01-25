@@ -7,7 +7,7 @@ const Message = props => {
       <span className="title">{props.message.user_id}</span>
       <p>{props.message.content}</p>
       <a href="#!" className="secondary-content">
-        <i className="material-icons">grade</i>
+        {`${props.message.user}`}
       </a>
     </li>
   );

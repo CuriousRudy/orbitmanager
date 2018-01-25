@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { postCharacter } from '../actions/index.js';
-import { Card, CardTitle, Button, Col } from 'react-materialize';
+import { Button } from 'react-materialize';
 import '../actions/index.js';
 
 class Character extends React.Component {
@@ -60,54 +60,58 @@ class Character extends React.Component {
   };
   render() {
     const buttons = !this.state.clicked ? (
-      <Button onClick={() => this.importCharacter()}>Import</Button>
+      <Button
+        className="yellow darken-2 blue-grey-text text-darken-3"
+        onClick={() => this.importCharacter()}
+      >
+        Import
+      </Button>
     ) : (
       <Button disabled="true">Imported</Button>
     );
     // debugger;
     return (
-      <div>
+      <div className="col s4">
         {this.state.loading ? (
           <div className="preloader-wrapper big active">
             <div className="spinner-layer spinner-blue-only">
               <div className="circle-clipper left">
                 <div className="circle" />
               </div>
-              <div className="gap-patch">
-                <div className="circle" />
-              </div>
-              <div className="circle-clipper right">
-                <div className="circle" />
-              </div>
             </div>
           </div>
         ) : (
-          <Col className="character-card" s={4}>
-            <Card
-              className="hoverable"
-              header={
-                <CardTitle
-                  reveal
-                  image={this.props.character.player_emblem}
-                  waves="light"
-                />
-              }
-              title={this.setClassName(this.props.character.player_class)}
-              reveal={
-                <div>
-                  <p>{this.props.character.light} Light</p>
-                  <p>
-                    {`${this.setRace(this.props.character.race)}
-                      ${this.setGender(this.props.character.gender)}
-                      ${this.setClassName(this.props.character.player_class)}
-                    `}
-                  </p>
-                </div>
-              }
-            >
-              <p>{this.props.dashboard ? null : buttons}</p>
-            </Card>
-          </Col>
+          <div
+            className="card hoverable blue-grey darken-2"
+            style={{ height: '18em' }}
+          >
+            <div className="card-image waves-effect waves-block waves-light">
+              <img
+                alt="the player emblem"
+                className="activator"
+                src={this.props.character.player_emblem}
+              />
+            </div>
+            <div className="card-content blue-grey darken-2">
+              <span className="card-title activator ">
+                <p className="yellow-text center text-darken-2">{`${this.setGender(
+                  this.props.character.gender
+                )} ${this.setClassName(this.props.character.player_class)}`}</p>
+              </span>
+              <p />
+            </div>
+            <div className="card-reveal blue-grey darken-2">
+              <span className="card-title yellow-text center text-darken-2">
+                {`${this.setRace(this.props.character.race)} ${this.setGender(
+                  this.props.character.gender
+                )} ${this.setClassName(this.props.character.player_class)}`}
+              </span>
+              <p className="yellow-text center text-darken-2">
+                {this.props.character.light} Light
+              </p>
+            </div>
+            <p>{this.props.dashboard ? null : buttons}</p>
+          </div>
         )}
       </div>
     );

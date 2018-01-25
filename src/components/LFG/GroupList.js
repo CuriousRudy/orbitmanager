@@ -17,7 +17,7 @@ class GroupList extends React.Component {
   //   return nextProps.groups === this.props.groupsList;
   // };
   render() {
-    console.log(this.props.groupsList);
+    // console.log(this.props.groupsList);
     const groups = this.props.groupsList.map((group, i) => (
       <Group key={i} group={group} />
     ));

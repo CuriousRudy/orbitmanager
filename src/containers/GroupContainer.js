@@ -10,7 +10,11 @@ class GroupContainer extends React.Component {
   };
 
   componentDidMount = () => {
-    this.props.fetchGroups();
+    if (localStorage.getItem('token')) {
+      this.props.fetchGroups();
+    } else {
+      this.props.history.push('/login');
+    }
   };
 
   toggleForm = () => {
@@ -25,16 +29,17 @@ class GroupContainer extends React.Component {
     this.setState({ showForm: false });
   };
   render() {
-    console.log(this.props.groupsList);
+    // console.log(this.props.groupsList);
     return (
-      <div>
+      <div className="blue-grey lighten-2" style={{ height: '100%' }}>
+        <br />
         <div className="row">
           <ul className="col s12">
             <div className="col s2"> </div>
             <li className="col s4">
               <button
                 style={{ width: '100%' }}
-                className="waves-effect waves-teal btn-flat"
+                className="blue-grey-text text-darken-2 waves-effect waves-light btn-flat yellow darken-2"
                 onClick={() => this.toggleForm()}
               >
                 New
@@ -44,7 +49,7 @@ class GroupContainer extends React.Component {
             <li className="col s4">
               <button
                 style={{ width: '100%' }}
-                className="waves-effect waves-teal btn-flat"
+                className="blue-grey-text text-darken-2 waves-effect waves-light btn-flat yellow darken-2"
                 onClick={() => this.toggleList()}
               >
                 List
@@ -55,8 +60,11 @@ class GroupContainer extends React.Component {
         </div>
 
         {this.state.showForm ? (
-          <div className="container">
-            <NewGroupForm createGroup={this.createGroup} />
+          <div className="row">
+            <div className="col s1" />
+            <div className="col s10">
+              <NewGroupForm createGroup={this.createGroup} />
+            </div>
           </div>
         ) : (
           <div className="row">

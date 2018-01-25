@@ -22,12 +22,12 @@ class CharactersSetup extends React.Component {
     );
 
     return (
-      <div id="big-title">
-        <h3>Import Your Guardians</h3>
-
+      <div id="big-title" className="col s10 blue-grey blu-grey lighten-2">
+        <br />
+        <br />
         {this.props.isLoggedIn.status ? (
           <button
-            className="pulse"
+            className="yellow darken-2 pulse btn waves-effect waves-dark blue-grey-text text-darken-2"
             onClick={() => {
               // debugger;
               this.props.characterIds.map(characterId => {
@@ -41,9 +41,13 @@ class CharactersSetup extends React.Component {
             Import Your Guardians
           </button>
         ) : null}
+        <br />
+        <br />
         <Row>{characters}</Row>
-        <button>
-          <a href="/dashboard">Done</a>
+        <button className="btn waves-effect waves-dark yellow darken-2">
+          <a className="blue-grey-text darken-2" href="/dashboard">
+            Done
+          </a>
         </button>
       </div>
     );

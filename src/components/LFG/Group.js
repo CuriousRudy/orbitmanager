@@ -1,36 +1,72 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { joinGroup } from '../../actions/index.js';
 
 class Group extends React.Component {
   render() {
     return (
-      <div className="card col s3 sticky-action">
-        <div className="card-image waves-effect waves-block waves-light">
-          <img
-            alt="a destiny pic"
-            className="activator"
-            src="https://res.cloudinary.com/teepublic/image/private/s--X6s0f4i0--/c_crop,x_10,y_10/c_fit,h_1109/c_crop,g_north_west,h_1260,w_1260,x_-158,y_-76/co_rgb:191919,e_colorize,u_Misc:One%20Pixel%20Gray/c_scale,g_north_west,h_1260,w_1260/fl_layer_apply,g_north_west,x_-158,y_-76/bo_45px_solid_white/e_overlay,fl_layer_apply,h_1260,l_Misc:Art%20Print%20Bumpmap,w_1260/e_shadow,x_6,y_6/c_limit,h_1134,w_1134/c_lpad,g_center,h_1260,w_1260/b_rgb:eeeeee/c_limit,f_jpg,h_630,q_90,w_630/v1476788483/production/designs/740979_1.jpg"
-          />
-        </div>
-        <div className="card-content">
-          <span className="card-title activator grey-text text-darken-4">
-            {this.props.group.game_mode}
-          </span>
-          <div className="card-action">
-            <a href="#">This is a link</a>
+      <div className="col s4">
+        <div className="card hoverable blue-grey large darken-2 sticky-action">
+          <div className="card-image waves-effect waves-block waves-light">
+            <img
+              alt="a destiny pic"
+              className="activator"
+              src="img/nightfall.jpg"
+            />
           </div>
-        </div>
-        <div className="card-reveal">
-          <span className="card-title grey-text text-darken-4">
-            {this.props.group.game_mode}
-          </span>
-          <h5>{this.props.group.difficulty}</h5>
-          <p>looking for: </p>
-          <p>{this.props.group.party_size} players</p>
-          <div>
-            {this.props.group.fireteam.map(member => (
-              <div className="chip">{member.gamertag}</div>
-            ))}
+          <div className="card-content blue-grey darken-2">
+            <span className="card-title activator yellow-text center text-darken-2">
+              {this.props.group.game_mode}
+            </span>
+            <div className="card-action">
+              {this.props.group.party_size === 0 ? (
+                <button style={{ width: '100%' }} className="btn-flat disabled">
+                  Party Full
+                </button>
+              ) : (
+                <button
+                  style={{ width: '100%' }}
+                  onClick={() => this.props.joinGroup(this.props.group.id)}
+                  className="btn-flat waves-effect waves-light yellow darken-2 blue-grey-text text-darken-4"
+                >
+                  Join
+                </button>
+              )}
+            </div>
+          </div>
+          <div className="card-reveal blue-grey darken-2">
+            <span className="card-title  yellow-text center text-darken-2">
+              {this.props.group.game_mode}
+            </span>
+            <h4 className="yellow-text center text-darken-2">
+              {this.props.group.difficulty}
+            </h4>
+            {this.props.group.party_size === 0 ? null : (
+              <p className="yellow-text center text-darken-2">looking for: </p>
+            )}
+            {this.props.group.party_size === 0 ? null : (
+              <p className="yellow-text center text-darken-2">
+                {this.props.group.party_size} players
+              </p>
+            )}
+            <br />
+            <br />
+
+            <div>
+              <h4 className="yellow-text center text-darken-2">
+                Guardians Engaged
+              </h4>
+            </div>
+            <div>
+              {this.props.group.fireteam.map((member, i) => (
+                <div
+                  key={i}
+                  className="chip small yellow darken-2 blue-grey-text text-darken-2"
+                >
+                  {member.gamertag}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -43,4 +79,4 @@ const mapStateToProps = state => {
     ...state
   };
 };
-export default connect(mapStateToProps)(Group);
+export default connect(mapStateToProps, { joinGroup })(Group);

@@ -22,7 +22,7 @@ class ForumMessages extends React.Component {
         return <Message key={i} message={message} />;
       }
     );
-    return <ul className="collection blue-grey darken-3">{messageList}</ul>;
+    return <ul className="collection">{messageList}</ul>;
   }
 }
 

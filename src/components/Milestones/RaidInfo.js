@@ -1,12 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { raidOrderInfo } from '../../services/api.js';
-import { Collapsible, CollapsibleItem, Row, Col } from 'react-materialize';
+import { raidOrderInfo, defineModifier } from '../../services/api.js';
 
 class PvEInfo extends React.Component {
   state = {
-    normal: this.props.milestones[3660836525].availableQuests[0].activity
-      .variants[0],
+    nightfall: this.props.milestones[2171429505].availableQuests[0].activity
+      .modifierHashes,
     prestige: this.props.milestones[3660836525].availableQuests[0].activity
       .variants[1]
   };
@@ -16,92 +15,101 @@ class PvEInfo extends React.Component {
   // };
 
   render() {
-    const normal = raidOrderInfo(`${this.state.normal.activityHash}`);
     const prestige = raidOrderInfo(`${this.state.prestige.activityHash}`);
-    console.log(this.state.normal.activityHash);
+    const nightfall = this.state.nightfall.map(modifier =>
+      defineModifier(`${modifier}`)
+    );
+    console.log(nightfall);
     return (
-      <CollapsibleItem header="Game Info">
+      <div className="row">
         <div className="col s4 left">
-          <div class="card">
-            <div class="card-image waves-effect waves-block waves-light">
-              <img class="activator" src="img/nightfall.jpg" />
+          <div className="card hoverable blue-grey darken-4">
+            <div className="card-image waves-effect waves-block waves-light">
+              <img
+                className="activator"
+                alt="insignia of the nightfall strike"
+                src="img/nightfall.jpg"
+              />
             </div>
-            <div class="card-content">
-              <span class="card-title activator grey-text text-darken-4">
-                Nightfall<i class="material-icons right">more_vert</i>
+            <div className="card-content blue-grey darken-4">
+              <span className="card-title activator yellow-text text-darken-2 center">
+                Nightfall
               </span>
-              <p>
-                <a href="#">This is a link</a>
-              </p>
+              <p />
             </div>
-            <div class="card-reveal">
-              <span class="card-title grey-text text-darken-4">
-                Card Title<i class="material-icons right">close</i>
+            <div className="card-reveal blue-grey darken-4">
+              <span className="card-title yellow-text text-darken-2 center">
+                This week's Nightfall Strike
               </span>
-              <p>
-                Here is some more information about this product that is only
-                revealed once clicked on.
-              </p>
+              <span>
+                <p className="yellow-text text-darken-2 center">
+                  --------------------------------------------------------
+                </p>
+              </span>
+              <br />
+              <br />
+              <br />
+              <div className="row">
+                <div className="col s12">
+                  {nightfall.map(modifier => (
+                    <div className="col s6">
+                      <p className="yellow-text text-darken-2 center">
+                        {modifier.name}
+                      </p>
+                      <br />
+
+                      <p className="yellow-text text-darken-2 center">
+                        {modifier.description}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+                <br />
+              </div>
             </div>
           </div>
         </div>
         <div className="col s8">
-          <div className="col s12" style={{ height: '22.5em' }}>
-            {normal.order.map((activity, i) => (
-              <div key={i} class="card small col s4">
-                <div class="card-image waves-effect waves-block waves-light">
-                  <img class="activator" src={activity.image} />
-                </div>
-                <div class="card-content">
-                  <span class="card-title activator grey-text text-darken-4">
-                    {activity.name}
-                  </span>
-                  <p>
-                    Datto's guide can be found
-                    <a href={activity.video}> here</a>
-                  </p>
-                </div>
-                <div class="card-reveal">
-                  <span class="card-title grey-text text-darken-4">
-                    Card Title<i class="material-icons right">close</i>
-                  </span>
-                  <p>
-                    Here is some more information about this product that is
-                    only revealed once clicked on.
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="col s12 style={{ height: '50%' }}">
+          <div>
             {prestige.order.map((activity, i) => (
-              <div key={i} class="card vertical small col s4">
-                <div class="card-image waves-effect waves-block waves-light">
-                  <img class="activator" src={activity.image} />
+              <div
+                key={i}
+                className="card hoverable medium blue-grey darken-4 col s4"
+              >
+                <div className="card-image waves-effect waves-block waves-light">
+                  <img className="activator" alt="" src={activity.image} />
                 </div>
-                <div class="card-content">
-                  <span class="card-title activator grey-text text-darken-4">
+                <div className="card-content blue-grey darken-4">
+                  <span className="card-title activator">
+                    <p className="yellow-text text-darken-2 center">
+                      {activity.name}
+                    </p>
+                  </span>
+                </div>
+                <div className="card-reveal blue-grey darken-4">
+                  <span className="card-title yellow-text text-darken-2 center">
                     {activity.name}
                   </span>
-                  <p>
-                    Datto's guide can be found
-                    <a href={activity.video}> here</a>
-                  </p>
-                </div>
-                <div class="card-reveal">
-                  <span class="card-title grey-text text-darken-4">
-                    Card Title<i class="material-icons right">close</i>
-                  </span>
-                  <p>
-                    Here is some more information about this product that is
-                    only revealed once clicked on.
-                  </p>
+                  <iframe
+                    title="activity-video"
+                    width="336"
+                    height="189"
+                    src={`https://www.youtube.com/embed/${
+                      activity.video.split('v=')[1]
+                    }`}
+                    frameBorder="0"
+                    allowFullScreen
+                  />
                 </div>
               </div>
             ))}
+            <div className="col s12 green">
+              I can put some information about the final encounter and include
+              the video to that as well
+            </div>
           </div>
         </div>
-      </CollapsibleItem>
+      </div>
     );
   }
 }
